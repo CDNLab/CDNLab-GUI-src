@@ -1,0 +1,4 @@
+# Partial Tkenv config file -- see $HOME/.tkenvrc as well
+inspector "CDN_Infrastructure2" "CDN_Infrastructure2" "2" "565x342+75+75:normal"
+inspector "CDN_Infrastructure_test" "CDN_Infrastructure_test" "2" "565x342+175+175:normal"
+

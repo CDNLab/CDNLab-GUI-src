@@ -1,0 +1,2359 @@
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Lesser General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Lesser General Public License for more details.
+// 
+// You should have received a copy of the GNU Lesser General Public License
+// along with this program.  If not, see http://www.gnu.org/licenses/.
+// 
+
+package inet.cdnlab;
+
+import inet.nodes.inet.Router;
+import inet.world.httptools.HttpController;
+import inet.networklayer.autorouting.ipv4.IPv4NetworkConfigurator;
+import inet.nodes.inet.StandardHost;
+import inet.cdnlab.controller.CDNController;
+
+network CDN_InfrastructureByCountry
+{
+    @display("bgb=1700,755;bgl=78;bgi=maps/world,s");
+    types:
+        channel gigabitline extends ned.DatarateChannel
+        {
+            parameters:
+                delay = 0.1us;
+                datarate = 1000Mbps;
+        }
+    submodules:
+        originServer1: StandardHost {
+            @display("p=441,176;i=device/server,,0;is=vs");
+        }
+        surrogateServer1: StandardHost {
+            parameters:
+                @display("p=585,124;i=device/server2;is=vs");
+                //IP_address_on_web = "69.73.128.0";
+                //latitude = 29.7018;
+                //longitude = -95.9137;
+        }
+        surrogateServer2: StandardHost {
+            @display("p=143,235;i=device/server2;is=vs");
+        }
+		//
+        controller: CDNController {
+            @display("p=30,23;i=block/cogwheel;is=vs");
+        }
+        configurator: IPv4NetworkConfigurator {
+            @display("p=1681,32");
+        }
+
+		//CLIENTS
+
+        //clients_IE: Client {
+        //parameters:
+        //	@display("i=device/laptop_l;t=[212.78.238.39];is=vs");
+        //	IP_address_on_web = "212.78.238.39";
+        //	latitude = 53;
+        //	longitude = -8;
+        //}
+        clients_DE: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[192.251.226.205];is=vs");
+                IP_address_on_web = "192.251.226.205";
+                latitude = 51.9;
+                longitude = 8.3833;
+        }
+        clients_MX: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[66.249.66.143];is=vs");
+                IP_address_on_web = "66.249.66.143";
+                latitude = 37.4192;
+                longitude = -122.057;
+        }
+        clients_CA: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[66.249.71.143];is=vs");
+                IP_address_on_web = "66.249.71.143";
+                latitude = 41.9015;
+                longitude = -85.0346;
+        }
+        clients_SE: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[213.132.117.7];is=vs");
+                IP_address_on_web = "213.132.117.7";
+                latitude = 59.3333;
+                longitude = 18.05;
+        }
+        clients_BY: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[95.37.7.175];is=vs;p=89,171");
+                IP_address_on_web = "95.37.7.175";
+                latitude = 58.5167;
+                longitude = 31.2833;
+        }
+        clients_DK: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[83.226.195.145];is=vs");
+                IP_address_on_web = "83.226.195.145";
+                latitude = 59.5333;
+                longitude = 13.4667;
+        }
+        clients_CZ: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[82.208.17.1];is=vs");
+                IP_address_on_web = "82.208.17.1";
+                latitude = 49.75;
+                longitude = 15.5;
+        }
+        clients_LI: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[195.71.226.87];is=vs");
+                IP_address_on_web = "195.71.226.87";
+                latitude = 48.15;
+                longitude = 11.5833;
+        }
+        clients_BE: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[78.225.101.56];is=vs");
+                IP_address_on_web = "78.225.101.56";
+                latitude = 48.9;
+                longitude = 2.3333;
+        }
+        clients_KH: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[124.157.179.239];is=vs");
+                IP_address_on_web = "124.157.179.239";
+                latitude = 13.75;
+                longitude = 100.517;
+        }
+        clients_A1: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[173.54.2.197];is=vs");
+                IP_address_on_web = "173.54.2.197";
+                latitude = 40.5953;
+                longitude = -74.6172;
+        }
+        //clients_IL: Client {
+        //parameters:
+        //	@display("i=device/laptop_l;t=[81.218.219.122];is=vs");
+        //	IP_address_on_web = "81.218.219.122";
+        //	latitude = 31.5;
+        //	longitude = 34.75;
+        //}
+        clients_AX: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[80.244.85.67];is=vs");
+                IP_address_on_web = "80.244.85.67";
+                latitude = 63.8333;
+                longitude = 20.25;
+        }
+        clients_NO: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[93.124.226.46];is=vs");
+                IP_address_on_web = "93.124.226.46";
+                latitude = 62;
+                longitude = 10;
+        }
+
+        clients_KR: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[210.97.192.200];is=vs");
+                IP_address_on_web = "210.97.192.200";
+                latitude = 37.5664;
+                longitude = 127;
+        }
+        clients_PL: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[178.235.31.97];is=vs");
+                IP_address_on_web = "178.235.31.97";
+                latitude = 52.25;
+                longitude = 21;
+        }
+        clients_JP: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[119.63.196.12];is=vs");
+                IP_address_on_web = "119.63.196.12";
+                latitude = 36;
+                longitude = 138;
+        }
+        clients_NL: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[78.140.138.39];is=vs");
+                IP_address_on_web = "78.140.138.39";
+                latitude = 52.5;
+                longitude = 5.75;
+        }
+        clients_HK: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[218.213.130.162];is=vs");
+                IP_address_on_web = "218.213.130.162";
+                latitude = 22.35;
+                longitude = 114.133;
+        }
+        clients_SI: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[91.206.113.61];is=vs");
+                IP_address_on_web = "91.206.113.61";
+                latitude = 47.3333;
+                longitude = 13.3333;
+        }
+        clients_AP: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[109.120.144.247];is=vs");
+                IP_address_on_web = "109.120.144.247";
+                latitude = 60;
+                longitude = 100;
+        }
+        clients_ES: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[88.31.133.170];is=vs");
+                IP_address_on_web = "88.31.133.170";
+                latitude = 38.5333;
+                longitude = -0.1333;
+        }
+        //clients_PH: Client {
+        //parameters:
+        //	@display("i=device/laptop_l;t=[203.84.185.142];is=vs");
+        //	IP_address_on_web = "203.84.185.142";
+        //	latitude = 14.6042;
+        //	longitude = 120.982;
+        //}
+        clients_MD: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[89.28.48.122];is=vs");
+                IP_address_on_web = "89.28.48.122";
+                latitude = 47.0056;
+                longitude = 28.8575;
+        }
+        clients_LU: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[217.115.137.222];is=vs");
+                IP_address_on_web = "217.115.137.222";
+                latitude = 50.7333;
+                longitude = 7.1;
+        }
+        clients_SG: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[124.217.225.239];is=vs");
+                IP_address_on_web = "124.217.225.239";
+                latitude = 1.4667;
+                longitude = 103.75;
+        }
+        //clients_SK: Client {
+        //parameters:
+        //	@display("i=device/laptop_l;t=[94.21.136.43];is=vs");
+        //	IP_address_on_web = "94.21.136.43";
+        //	latitude = 47.6833;
+        //	longitude = 17.6333;
+        //}
+        clients_GB: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[83.170.92.9];is=vs");
+                IP_address_on_web = "83.170.92.9";
+                latitude = 54;
+                longitude = -2;
+        }
+        clients_UA: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[212.113.37.105];is=vs");
+                IP_address_on_web = "212.113.37.105";
+                latitude = 49;
+                longitude = 32;
+        }
+        clients_BS: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[173.234.142.61];is=vs");
+                IP_address_on_web = "173.234.142.61";
+                latitude = 33.7516;
+                longitude = -84.3915;
+        }
+
+        clients_MC: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[212.198.59.132];is=vs");
+                IP_address_on_web = "212.198.59.132";
+                latitude = 43.1167;
+                longitude = 5.9333;
+        }
+        clients_RU: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[78.24.40.138];is=vs");
+                IP_address_on_web = "78.24.40.138";
+                latitude = 51.5;
+                longitude = 46.1167;
+        }
+        clients_LA: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[14.207.147.96];is=vs");
+                IP_address_on_web = "14.207.147.96";
+                latitude = 15;
+                longitude = 100;
+        }
+        clients_BO: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[189.84.125.158];is=vs");
+                IP_address_on_web = "189.84.125.158";
+                latitude = -10;
+                longitude = -55;
+        }
+        clients_FR: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[188.165.216.40];is=vs");
+                IP_address_on_web = "188.165.216.40";
+                latitude = 46;
+                longitude = 2;
+        }
+        clients_TW: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[112.105.115.32];is=vs");
+                IP_address_on_web = "112.105.115.32";
+                latitude = 24.1433;
+                longitude = 120.681;
+        }
+        clients_EU: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[217.150.241.141];is=vs");
+                IP_address_on_web = "217.150.241.141";
+                latitude = 47;
+                longitude = 8;
+        }
+        //clients_EG: Client {
+        //parameters:
+        //	@display("i=device/laptop_l;t=[41.232.48.48];is=vs");
+        //	IP_address_on_web = "41.232.48.48";
+        //	latitude = 30.05;
+        //	longitude = 31.25;
+        //}
+        //clients_SM: Client {
+        //parameters:
+        //	@display("i=device/laptop_l;t=[80.183.7.216];is=vs");
+        //	IP_address_on_web = "80.183.7.216";
+        //	latitude = 44.4667;
+        //	longitude = 11.2667;
+        //}
+        clients_MY: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[110.137.122.189];is=vs");
+                IP_address_on_web = "110.137.122.189";
+                latitude = -5;
+                longitude = 120;
+        }
+        clients_RO: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[89.123.83.179];is=vs");
+                IP_address_on_web = "89.123.83.179";
+                latitude = 46.0667;
+                longitude = 23.5833;
+        }
+
+        //clients_GR: Client {
+        //parameters:
+        //	@display("i=device/laptop_l;t=[46.176.159.245];is=vs");
+        //	IP_address_on_web = "46.176.159.245";
+        //	latitude = 39;
+        //	longitude = 22;
+        //}
+        //clients_MT: Client {
+        //parameters:
+        //	@display("i=device/laptop_l;t=[46.11.53.194];is=vs");
+        //	IP_address_on_web = "46.11.53.194";
+        //	latitude = 35.8333;
+        //	longitude = 14.5833;
+        //}
+        clients_FI: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[82.141.92.194];is=vs");
+                IP_address_on_web = "82.141.92.194";
+                latitude = 64.0833;
+                longitude = 24.55;
+        }
+        clients_GH: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[173.0.3.208];is=vs");
+                IP_address_on_web = "173.0.3.208";
+                latitude = 0;
+                longitude = 0;
+        }
+		//clients_IN: Client {
+		//parameters:
+		//	@display("i=device/laptop_l;t=[203.129.192.122];is=vs");
+		//	IP_address_on_web = "203.129.192.122";
+		//	latitude = 13.0833;
+		//	longitude = 80.2833;
+		//}
+
+        clients_MA: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[212.217.7.90];is=vs");
+                IP_address_on_web = "212.217.7.90";
+                latitude = 32;
+                longitude = -5;
+        }
+        clients_CN: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[220.181.108.156];is=vs");
+                IP_address_on_web = "220.181.108.156";
+                latitude = 39.9289;
+                longitude = 116.388;
+        }
+        clients_IS: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[82.145.210.188];is=vs");
+                IP_address_on_web = "82.145.210.188";
+                latitude = 65;
+                longitude = -18;
+        }
+        clients_SL: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[41.83.20.111];is=vs");
+                IP_address_on_web = "41.83.20.111";
+                latitude = 14;
+                longitude = -14;
+        }
+        clients_AU: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[123.243.66.127];is=vs");
+                IP_address_on_web = "123.243.66.127";
+                latitude = -33.9333;
+                longitude = 151.233;
+        }
+        clients_US: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[192.250.49.1];is=vs");
+                IP_address_on_web = "192.250.49.1";
+                latitude = 42.3425;
+                longitude = -71.0677;
+        }
+        //clients_IT: Client {
+        //parameters:
+        //	@display("i=device/laptop_l;t=[2.37.30.74];is=vs");
+        //	IP_address_on_web = "2.37.30.74";
+        //	latitude = 42.8333;
+        //	longitude = 12.8333;
+        //}
+        clients_BG: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[212.91.184.14];is=vs");
+                IP_address_on_web = "212.91.184.14";
+                latitude = 43;
+                longitude = 25;
+        }
+        clients_HU: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[79.172.193.89];is=vs");
+                IP_address_on_web = "79.172.193.89";
+                latitude = 47.5;
+                longitude = 19.0833;
+        }
+        clients_NG: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[41.58.22.8];is=vs");
+                IP_address_on_web = "41.58.22.8";
+                latitude = 10;
+                longitude = 8;
+        }
+        //clients_GI: Client {
+        //parameters:
+        //	@display("i=device/laptop_l;t=[79.150.170.209];is=vs");
+        //	IP_address_on_web = "79.150.170.209";
+        //	latitude = 37.1833;
+        //	longitude = -3.6;
+        //}
+        clients_KZ: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[178.49.252.77];is=vs");
+                IP_address_on_web = "178.49.252.77";
+                latitude = 55.0411;
+                longitude = 82.9344;
+        }
+        //clients_SA: Client {
+        //parameters:
+        //	@display("i=device/laptop_l;t=[94.98.140.103];is=vs");
+        //	IP_address_on_web = "94.98.140.103";
+        //	latitude = 24.6408;
+        //	longitude = 46.7728;
+        //}
+        clients_PY: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[187.62.103.10];is=vs");
+                IP_address_on_web = "187.62.103.10";
+                latitude = -22.5833;
+                longitude = -44.9;
+        }
+        //clients_CL: Client {
+        //parameters:
+        //	@display("i=device/laptop_l;t=[190.151.31.17];is=vs");
+        //	IP_address_on_web = "190.151.31.17";
+        //	latitude = -33.45;
+        //	longitude = -70.6667;
+        //}
+        clients_ID: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[125.163.164.201];is=vs");
+                IP_address_on_web = "125.163.164.201";
+                latitude = -7.5561;
+                longitude = 110.832;
+        }
+        clients_CO: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[200.93.142.114];is=vs");
+                IP_address_on_web = "200.93.142.114";
+                latitude = 4.6;
+                longitude = -74.0833;
+        }
+		//clients_BD: Client {
+		//parameters:
+		//	@display("i=device/laptop_l;t=[182.50.64.67];is=vs");
+		//	IP_address_on_web = "182.50.64.67";
+		//	latitude = 28;
+		//	longitude = 84;
+		//}
+		//clients_AT: Client {
+		//parameters:
+		//	@display("i=device/laptop_l;t=[193.170.124.203];is=vs");
+		//	IP_address_on_web = "193.170.124.203";
+		//	latitude = 48.0667;
+		//	longitude = 14.75;
+		//}
+		//clients_LT: Client {
+		//parameters:
+		//	@display("i=device/laptop_l;t=[88.222.198.135];is=vs");
+		//	IP_address_on_web = "88.222.198.135";
+		//	latitude = 55.0833;
+		//	longitude = 24.2833;
+		//}
+
+        clients_IR: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[46.251.228.99];is=vs;p=1047,290");
+                IP_address_on_web = "46.251.228.99";
+                latitude = 32;//32+90=122
+                longitude = 53;//53+180=233
+        }
+        clients_ZA: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[88.202.124.121];is=vs");
+                IP_address_on_web = "88.202.124.121";
+                latitude = -29;
+                longitude = 24;
+        }
+        clients_TR: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[212.175.209.233];is=vs;p=945,327");
+                IP_address_on_web = "212.175.209.233";
+                latitude = 40.1917;
+                longitude = 29.0611;
+        }
+        clients_IQ: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[95.170.221.101];is=vs");
+                IP_address_on_web = "95.170.221.101";
+                latitude = 35.5617;
+                longitude = 45.4408;
+        }
+        clients_PT: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[188.82.101.38];is=vs");
+                IP_address_on_web = "188.82.101.38";
+                latitude = 41.55;
+                longitude = -8.4333;
+        }
+        clients_LV: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[89.111.16.203];is=vs");
+                IP_address_on_web = "89.111.16.203";
+                latitude = 56.9675;
+                longitude = 23.1567;
+        }
+        clients_VE: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[200.73.197.232];is=vs");
+                IP_address_on_web = "200.73.197.232";
+                latitude = 10.5;
+                longitude = -66.9167;
+        }
+        clients_BH: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[166.87.130.31];is=vs");
+                IP_address_on_web = "166.87.130.31";
+                latitude = 26.3042;
+                longitude = 50.1325;
+        }
+        clients_GA: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[41.158.128.190];is=vs");
+                IP_address_on_web = "41.158.128.190";
+                latitude = -1;
+                longitude = 11.75;
+        }
+        clients_AF: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[59.177.43.252];is=vs");
+                IP_address_on_web = "59.177.43.252";
+                latitude = 28.6667;
+                longitude = 77.2167;
+        }
+        clients_JE: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[86.182.198.113];is=vs");
+                IP_address_on_web = "86.182.198.113";
+                latitude = 50.8667;
+                longitude = -0.0167;
+        }
+        clients_NZ: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[121.98.210.238];is=vs");
+                IP_address_on_web = "121.98.210.238";
+                latitude = -36.8667;
+                longitude = 174.767;
+        }
+        clients_AR: Client {
+            parameters:
+                @display("i=device/laptop_l;t=[190.2.103.16];is=vs");
+                IP_address_on_web = "190.2.103.16";
+                latitude = -32.9511;
+                longitude = -60.6664;
+        }
+		//clients_PR: Client {
+		//parameters:
+		//	@display("i=device/laptop_l;t=[199.116.85.50];is=vs");
+		//	IP_address_on_web = "199.116.85.50";
+		//	latitude = 18.25;
+		//	longitude = -66.5;
+		//}
+		//clients_ME: Client {
+		//parameters:
+		//	@display("i=device/laptop_l;t=[78.1.112.105];is=vs");
+		//	IP_address_on_web = "78.1.112.105";
+		//	latitude = 42.5811;
+		//	longitude = 18.2181;
+		//}
+		//clients_RS: Client {
+		//parameters:
+		//	@display("i=device/laptop_l;t=[81.196.65.67];is=vs");
+		//	IP_address_on_web = "81.196.65.67";
+		//	latitude = 45.7494;
+		//	longitude = 21.2272;
+		//}
+		//clients_AM: Client {
+		//parameters:
+		//	@display("i=device/laptop_l;t=[188.132.190.23];is=vs");
+		//	IP_address_on_web = "188.132.190.23";
+		//	latitude = 38.3386;
+		//	longitude = 43.1819;
+		//}
+		//clients_CY: Client {
+		//parameters:
+		//	@display("i=device/laptop_l;t=[95.9.126.36];is=vs");
+		//	IP_address_on_web = "95.9.126.36";
+		//	latitude = 36.9125;
+		//	longitude = 30.6897;
+		//}
+		//clients_GE: Client {
+		//parameters:
+		//	@display("i=device/laptop_l;t=[85.173.109.242];is=vs");
+		//	IP_address_on_web = "85.173.109.242";
+		//	latitude = 43.4981;
+		//	longitude = 43.6189;
+		//}
+		//clients_AW: Client {
+		//parameters:
+		//	@display("i=device/laptop_l;t=[190.67.59.57];is=vs");
+		//	IP_address_on_web = "190.67.59.57";
+		//	latitude = 10.9639;
+		//	longitude = -74.7964;
+		//}
+		//clients_PA: Client {
+		//parameters:
+		//	@display("i=device/laptop_l;t=[200.35.145.110];is=vs");
+		//	IP_address_on_web = "200.35.145.110";
+		//	latitude = 9;
+		//	longitude = -80;
+		//}
+		//clients_AN: Client {
+		//parameters:
+		//	@display("i=device/laptop_l;t=[201.209.81.103];is=vs");
+		//	IP_address_on_web = "201.209.81.103";
+		//	latitude = 8.5983;
+		//	longitude = -71.145;
+		//}
+		//clients_TN: Client {
+		//parameters:
+		//	@display("i=device/laptop_l;t=[41.99.97.72];is=vs");
+		//	IP_address_on_web = "41.99.97.72";
+		//	latitude = 34.85;
+		//	longitude = 5.7333;
+		//}
+		//clients_AE: Client {
+		//parameters:
+		//	@display("i=device/laptop_l;t=[94.56.129.24];is=vs");
+		//	IP_address_on_web = "94.56.129.24";
+		//	latitude = 24.4667;
+		//	longitude = 54.3667;
+		//}
+		//clients_HR: Client {
+		//parameters:
+		//	@display("i=device/laptop_l;t=[93.138.79.153];is=vs");
+		//	IP_address_on_web = "93.138.79.153";
+		//	latitude = 45.8;
+		//	longitude = 16;
+		//}
+		//clients_KE: Client {
+		//parameters:
+		//	@display("i=device/laptop_l;t=[41.222.11.46];is=vs");
+		//	IP_address_on_web = "41.222.11.46";
+		//	latitude = -1.2833;
+		//	longitude = 36.8167;
+		//}
+		//clients_TH: Client {
+		//parameters:
+		//	@display("i=device/laptop_l;t=[118.101.149.152];is=vs");
+		//	IP_address_on_web = "118.101.149.152";
+		//	latitude = 5.4167;
+		//	longitude = 100.4;
+		//}
+		//clients_KG: Client {
+		//parameters:
+		//	@display("i=device/laptop_l;t=[61.167.49.188];is=vs");
+		//	IP_address_on_web = "61.167.49.188";
+		//	latitude = 44.65;
+		//	longitude = 82.8333;
+		//}
+
+
+
+
+        //---------------------------------- ROUTERS
+        asRouter_LV: AS_Router {
+            parameters:
+                @display("t=[LATVIA];is=vs");
+                latitude = 57;
+                longitude = 25;
+                country = "LV";
+        }
+
+        asRouter_LU: AS_Router {
+            parameters:
+                @display("t=[LUXEMBOURG];is=vs");
+                latitude = 50;
+                longitude = 6;
+                country = "LU";
+        }
+
+        asRouter_LT: AS_Router {
+            parameters:
+                @display("t=[LITHUANIA];is=vs");
+                latitude = 55;
+                longitude = 24;
+                country = "LT";
+        }
+
+        asRouter_VN: AS_Router {
+            parameters:
+                @display("t=[VIET NAM];is=vs");
+                latitude = 11;
+                longitude = 107;
+                country = "VN";
+        }
+
+        asRouter_VI: AS_Router {
+            parameters:
+                @display("t=[VIRGIN ISLANDS (U.S.)];is=vs");
+                latitude = 18;
+                longitude = -65;
+                country = "VI";
+        }
+
+        asRouter_DZ: AS_Router {
+            parameters:
+                @display("t=[ALGERIA];is=vs");
+                latitude = 28;
+                longitude = 3;
+                country = "DZ";
+        }
+
+        asRouter_VG: AS_Router {
+            parameters:
+                @display("t=[VIRGIN ISLANDS (BRITISH)];is=vs");
+                latitude = 18;
+                longitude = -65;
+                country = "VG";
+        }
+
+        asRouter_VE: AS_Router {
+            parameters:
+                @display("t=[VENEZUELA];is=vs");
+                latitude = 10;
+                longitude = -67;
+                country = "VE";
+        }
+
+        asRouter_MG: AS_Router {
+            parameters:
+                @display("t=[MADAGASCAR];is=vs");
+                latitude = -19;
+                longitude = 48;
+                country = "MG";
+        }
+
+        asRouter_MH: AS_Router {
+            parameters:
+                @display("t=[MARSHALL ISLANDS];is=vs");
+                latitude = 7;
+                longitude = 171;
+                country = "MH";
+        }
+
+        asRouter_DO: AS_Router {
+            parameters:
+                @display("t=[DOMINICAN REPUBLIC];is=vs");
+                latitude = 18;
+                longitude = -70;
+                country = "DO";
+        }
+
+        asRouter_ME: AS_Router {
+            parameters:
+                @display("t=[MONTENEGRO];is=vs");
+                latitude = 42;
+                longitude = 19;
+                country = "ME";
+        }
+
+        asRouter_MK: AS_Router {
+            parameters:
+                @display("t=[MACEDONIA];is=vs");
+                latitude = 42;
+                longitude = 21;
+                country = "MK";
+        }
+
+        asRouter_DE: AS_Router {
+            parameters:
+                @display("t=[GERMANY];is=vs;p=965,144");
+                latitude = 51;
+                longitude = 9;
+                country = "DE";
+        }
+
+        asRouter_UZ: AS_Router {
+            parameters:
+                @display("t=[UZBEKISTAN];is=vs");
+                latitude = 41;
+                longitude = 69;
+                country = "UZ";
+        }
+
+        asRouter_MC: AS_Router {
+            parameters:
+                @display("t=[MONACO];is=vs");
+                latitude = 44;
+                longitude = 7;
+                country = "MC";
+        }
+
+        asRouter_MD: AS_Router {
+            parameters:
+                @display("t=[MOLDOVA  REPUBLIC OF];is=vs");
+                latitude = 47;
+                longitude = 29;
+                country = "MD";
+        }
+
+        asRouter_DK: AS_Router {
+            parameters:
+                @display("t=[DENMARK];is=vs");
+                latitude = 56;
+                longitude = 12;
+                country = "DK";
+        }
+
+        asRouter_MA: AS_Router {
+            parameters:
+                @display("t=[MOROCCO];is=vs;p=756,389");
+                latitude = 34;
+                longitude = -6;
+                country = "MA";
+        }
+
+        asRouter_MU: AS_Router {
+            parameters:
+                @display("t=[MAURITIUS];is=vs");
+                latitude = -20;
+                longitude = 58;
+                country = "MU";
+        }
+
+        asRouter_US: AS_Router {
+            parameters:
+                @display("t=[UNITED STATES];is=vs;p=339,217");
+                latitude = 42;
+                longitude = -71;
+                country = "US";
+        }
+
+        asRouter_MX: AS_Router {
+            parameters:
+                @display("t=[MEXICO];is=vs;p=264,330");
+                latitude = 19;
+                longitude = -99;
+                country = "MX";
+        }
+
+        asRouter_MZ: AS_Router {
+            parameters:
+                @display("t=[MOZAMBIQUE];is=vs");
+                latitude = -26;
+                longitude = 33;
+                country = "MZ";
+        }
+
+        asRouter_MY: AS_Router {
+            parameters:
+                @display("t=[MALAYSIA];is=vs");
+                latitude = 2;
+                longitude = 112;
+                country = "MY";
+        }
+
+        asRouter_EU: AS_Router {
+            parameters:
+                @display("t=[];is=vs");
+                latitude = 47;
+                longitude = 8;
+                country = "EU";
+        }
+
+        asRouter_MQ: AS_Router {
+            parameters:
+                @display("t=[MARTINIQUE];is=vs");
+                latitude = 15;
+                longitude = -61;
+                country = "MQ";
+        }
+
+        asRouter_UG: AS_Router {
+            parameters:
+                @display("t=[UGANDA];is=vs");
+                latitude = 1;
+                longitude = 32;
+                country = "UG";
+        }
+
+        asRouter_MT: AS_Router {
+            parameters:
+                @display("t=[MALTA];is=vs");
+                latitude = 36;
+                longitude = 14;
+                country = "MT";
+        }
+
+        asRouter_UA: AS_Router {
+            parameters:
+                @display("t=[UKRAINE];is=vs");
+                latitude = 50;
+                longitude = 31;
+                country = "UA";
+        }
+
+        asRouter_NG: AS_Router {
+            parameters:
+                @display("t=[NIGERIA];is=vs");
+                latitude = 10;
+                longitude = 8;
+                country = "NG";
+        }
+
+        asRouter_NI: AS_Router {
+            parameters:
+                @display("t=[NICARAGUA];is=vs");
+                latitude = 12;
+                longitude = -86;
+                country = "NI";
+        }
+
+        asRouter_ES: AS_Router {
+            parameters:
+                @display("t=[SPAIN];is=vs");
+                latitude = 40;
+                longitude = -4;
+                country = "ES";
+        }
+
+        asRouter_NL: AS_Router {
+            parameters:
+                @display("t=[NETHERLANDS];is=vs");
+                latitude = 52;
+                longitude = 4;
+                country = "NL";
+        }
+
+        asRouter_EG: AS_Router {
+            parameters:
+                @display("t=[EGYPT];is=vs;p=729,276");
+                latitude = 27;
+                longitude = 30;
+                country = "EG";
+        }
+
+        asRouter_TZ: AS_Router {
+            parameters:
+                @display("t=[TANZANIA  UNITED REPUBLIC OF];is=vs");
+                latitude = -6;
+                longitude = 35;
+                country = "TZ";
+        }
+
+        asRouter_EE: AS_Router {
+            parameters:
+                @display("t=[ESTONIA];is=vs;p=1065,159");
+                latitude = 59;
+                longitude = 24;
+                country = "EE";
+        }
+
+        asRouter_TT: AS_Router {
+            parameters:
+                @display("t=[TRINIDAD AND TOBAGO];is=vs");
+                latitude = 11;
+                longitude = -61;
+                country = "TT";
+        }
+
+        asRouter_TW: AS_Router {
+            parameters:
+                @display("t=[TAIWAN  PROVINCE OF CHINA];is=vs");
+                latitude = 25;
+                longitude = 122;
+                country = "TW";
+        }
+
+        asRouter_GE: AS_Router {
+            parameters:
+                @display("t=[GEORGIA];is=vs");
+                latitude = 42;
+                longitude = 43;
+                country = "GE";
+        }
+
+        asRouter_NZ: AS_Router {
+            parameters:
+                @display("t=[NEW ZEALAND];is=vs;p=1465,550");
+                latitude = -41;
+                longitude = 174;
+                country = "NZ";
+        }
+
+        asRouter_GA: AS_Router {
+            parameters:
+                @display("t=[GABON];is=vs");
+                latitude = -1;
+                longitude = 12;
+                country = "GA";
+        }
+
+        asRouter_GB: AS_Router {
+            parameters:
+                @display("t=[UNITED KINGDOM];is=vs");
+                latitude = 54;
+                longitude = -2;
+                country = "GB";
+        }
+
+        asRouter_NO: AS_Router {
+            parameters:
+                @display("t=[NORWAY];is=vs");
+                latitude = 63;
+                longitude = 10;
+                country = "NO";
+        }
+
+        asRouter_OM: AS_Router {
+            parameters:
+                @display("t=[OMAN];is=vs");
+                latitude = 24;
+                longitude = 59;
+                country = "OM";
+        }
+
+        asRouter_FR: AS_Router {
+            parameters:
+                @display("t=[FRANCE];is=vs");
+                latitude = 46;
+                longitude = 2;
+                country = "FR";
+        }
+
+        asRouter_FO: AS_Router {
+            parameters:
+                @display("t=[FAROE ISLANDS];is=vs");
+                latitude = 62;
+                longitude = -7;
+                country = "FO";
+        }
+
+        asRouter_FK: AS_Router {
+            parameters:
+                @display("t=[FALKLAND ISLANDS (MALVINAS)];is=vs");
+                latitude = -52;
+                longitude = -59;
+                country = "FK";
+        }
+
+        asRouter_FM: AS_Router {
+            parameters:
+                @display("t=[MICRONESIA  FEDERATED STATES OF];is=vs;p=1311,223");
+                latitude = 7;
+                longitude = 158;
+                country = "FM";
+        }
+
+        asRouter_FI: AS_Router {
+            parameters:
+                @display("t=[FINLAND];is=vs");
+                latitude = 60;
+                longitude = 25;
+                country = "FI";
+        }
+
+        asRouter_WS: AS_Router {
+            parameters:
+                @display("t=[SAMOA];is=vs");
+                latitude = -14;
+                longitude = -172;
+                country = "WS";
+        }
+
+        asRouter_PL: AS_Router {
+            parameters:
+                @display("t=[POLAND];is=vs");
+                latitude = 53;
+                longitude = 19;
+                country = "PL";
+        }
+
+        asRouter_GU: AS_Router {
+            parameters:
+                @display("t=[GUAM];is=vs");
+                latitude = 13;
+                longitude = 145;
+                country = "GU";
+        }
+
+        asRouter_GT: AS_Router {
+            parameters:
+                @display("t=[GUATEMALA];is=vs");
+                latitude = 15;
+                longitude = -91;
+                country = "GT";
+        }
+
+        asRouter_PH: AS_Router {
+            parameters:
+                @display("t=[PHILIPPINES];is=vs;p=1199,234");
+                latitude = 15;
+                longitude = 121;
+                country = "PH";
+        }
+
+        asRouter_GR: AS_Router {
+            parameters:
+                @display("t=[GREECE];is=vs");
+                latitude = 38;
+                longitude = 24;
+                country = "GR";
+        }
+
+        asRouter_PK: AS_Router {
+            parameters:
+                @display("t=[PAKISTAN];is=vs");
+                latitude = 25;
+                longitude = 67;
+                country = "PK";
+        }
+
+        asRouter_PF: AS_Router {
+            parameters:
+                @display("t=[FRENCH POLYNESIA];is=vs");
+                latitude = -18;
+                longitude = -150;
+                country = "PF";
+        }
+
+        asRouter_PA: AS_Router {
+            parameters:
+                @display("t=[PANAMA];is=vs");
+                latitude = 9;
+                longitude = -80;
+                country = "PA";
+        }
+
+        asRouter_GI: AS_Router {
+            parameters:
+                @display("t=[GIBRALTAR];is=vs");
+                latitude = 36;
+                longitude = -5;
+                country = "GI";
+        }
+
+        asRouter_GH: AS_Router {
+            parameters:
+                @display("t=[GHANA];is=vs");
+                latitude = 8;
+                longitude = -2;
+                country = "GH";
+        }
+
+        asRouter_A2: AS_Router {
+            parameters:
+                @display("t=[];is=vs");
+                latitude = 0;
+                longitude = 0;
+                country = "A2";
+        }
+
+        asRouter_A1: AS_Router {
+            parameters:
+                @display("t=[];is=vs;p=440,417");
+                latitude = 0;
+                longitude = 0;
+                country = "A1";
+        }
+
+        asRouter_HK: AS_Router {
+            parameters:
+                @display("t=[HONG KONG];is=vs");
+                latitude = 22;
+                longitude = 114;
+                country = "HK";
+        }
+
+        asRouter_ZA: AS_Router {
+            parameters:
+                @display("t=[SOUTH AFRICA];is=vs;p=900,379");
+                latitude = -29;
+                longitude = 24;
+                country = "ZA";
+        }
+
+        asRouter_RE: AS_Router {
+            parameters:
+                @display("t=[REUNION];is=vs;p=508,234");
+                latitude = -21;
+                longitude = 55;
+                country = "RE";
+        }
+
+        asRouter_HN: AS_Router {
+            parameters:
+                @display("t=[HONDURAS];is=vs");
+                latitude = 14;
+                longitude = -88;
+                country = "HN";
+        }
+
+        asRouter_HR: AS_Router {
+            parameters:
+                @display("t=[CROATIA (local name: Hrvatska)];is=vs");
+                latitude = 46;
+                longitude = 16;
+                country = "HR";
+        }
+
+        asRouter_RO: AS_Router {
+            parameters:
+                @display("t=[ROMANIA];is=vs");
+                latitude = 45;
+                longitude = 24;
+                country = "RO";
+        }
+
+        asRouter_HU: AS_Router {
+            parameters:
+                @display("t=[HUNGARY];is=vs");
+                latitude = 47;
+                longitude = 19;
+                country = "HU";
+        }
+
+        asRouter_ZM: AS_Router {
+            parameters:
+                @display("t=[ZAMBIA];is=vs;p=211,121");
+                latitude = -15;
+                longitude = 30;
+                country = "ZM";
+        }
+
+        asRouter_ID: AS_Router {
+            parameters:
+                @display("t=[INDONESIA];is=vs;p=1148,254");
+                latitude = -6;
+                longitude = 107;
+                country = "ID";
+        }
+
+        asRouter_IE: AS_Router {
+            parameters:
+                @display("t=[IRELAND];is=vs");
+                latitude = 53;
+                longitude = -6;
+                country = "IE";
+        }
+
+        asRouter_AT: AS_Router {
+            parameters:
+                @display("t=[AUSTRIA];is=vs");
+                latitude = 48;
+                longitude = 16;
+                country = "AT";
+        }
+
+        asRouter_AS: AS_Router {
+            parameters:
+                @display("t=[AMERICAN SAMOA];is=vs");
+                latitude = -14;
+                longitude = -171;
+                country = "AS";
+        }
+
+        asRouter_AR: AS_Router {
+            parameters:
+                @display("t=[ARGENTINA];is=vs;p=555,507");
+                latitude = -35;
+                longitude = -59;
+                country = "AR";
+        }
+
+        asRouter_IL: AS_Router {
+            parameters:
+                @display("t=[ISRAEL];is=vs");
+                latitude = 31;
+                longitude = 35;
+                country = "IL";
+        }
+
+        asRouter_AX: AS_Router {
+            parameters:
+                @display("t=[];is=vs");
+                latitude = 60;
+                longitude = 20;
+                country = "AX";
+        }
+
+        asRouter_IM: AS_Router {
+            parameters:
+                @display("t=[];is=vs");
+                latitude = 54;
+                longitude = -5;
+                country = "IM";
+        }
+
+        asRouter_AW: AS_Router {
+            parameters:
+                @display("t=[ARUBA];is=vs");
+                latitude = 13;
+                longitude = -70;
+                country = "AW";
+        }
+
+        asRouter_IN: AS_Router {
+            parameters:
+                @display("t=[INDIA];is=vs;p=1138,305");
+                latitude = 13;
+                longitude = 78;
+                country = "IN";
+        }
+
+        asRouter_AU: AS_Router {
+            parameters:
+                @display("t=[AUSTRALIA];is=vs;p=1400,561");
+                latitude = -27;
+                longitude = 133;
+                country = "AU";
+        }
+
+        asRouter_IQ: AS_Router {
+            parameters:
+                @display("t=[IRAQ];is=vs");
+                latitude = 33;
+                longitude = 44;
+                country = "IQ";
+        }
+
+        asRouter_IR: AS_Router {
+            parameters:
+                @display("t=[IRAN (ISLAMIC REPUBLIC OF)];is=vs;p=1027,266");
+                latitude = 33;//(33+90)*4.19
+                longitude = 51;//(51+180)*4.72
+                country = "IR";
+        }
+
+        asRouter_AZ: AS_Router {
+            parameters:
+                @display("t=[AZERBAIJAN];is=vs");
+                latitude = 40;
+                longitude = 50;
+                country = "AZ";
+        }
+
+        asRouter_IS: AS_Router {
+            parameters:
+                @display("t=[ICELAND];is=vs");
+                latitude = 65;
+                longitude = -18;
+                country = "IS";
+        }
+
+        asRouter_IT: AS_Router {
+            parameters:
+                @display("t=[ITALY];is=vs");
+                latitude = 44;
+                longitude = 13;
+                country = "IT";
+        }
+
+        asRouter_BA: AS_Router {
+            parameters:
+                @display("t=[BOSNIA AND HERZEGOWINA];is=vs");
+                latitude = 45;
+                longitude = 17;
+                country = "BA";
+        }
+
+        asRouter_PT: AS_Router {
+            parameters:
+                @display("t=[PORTUGAL];is=vs");
+                latitude = 39;
+                longitude = -8;
+                country = "PT";
+        }
+
+        asRouter_AG: AS_Router {
+            parameters:
+                @display("t=[ANTIGUA AND BARBUDA];is=vs");
+                latitude = 17;
+                longitude = -62;
+                country = "AG";
+        }
+
+        asRouter_PR: AS_Router {
+            parameters:
+                @display("t=[PUERTO RICO];is=vs");
+                latitude = 18;
+                longitude = -67;
+                country = "PR";
+        }
+
+        asRouter_AE: AS_Router {
+            parameters:
+                @display("t=[UNITED ARAB EMIRATES];is=vs");
+                latitude = 25;
+                longitude = 55;
+                country = "AE";
+        }
+
+        asRouter_AF: AS_Router {
+            parameters:
+                @display("t=[AFGHANISTAN];is=vs;p=1077,247");
+                latitude = 35;
+                longitude = 69;
+                country = "AF";
+        }
+
+        asRouter_AL: AS_Router {
+            parameters:
+                @display("t=[ALBANIA];is=vs");
+                latitude = 41;
+                longitude = 20;
+                country = "AL";
+        }
+
+        asRouter_JE: AS_Router {
+            parameters:
+                @display("t=[];is=vs");
+                latitude = 49;
+                longitude = -2;
+                country = "JE";
+        }
+
+        asRouter_AO: AS_Router {
+            parameters:
+                @display("t=[ANGOLA];is=vs");
+                latitude = -9;
+                longitude = 13;
+                country = "AO";
+        }
+
+        asRouter_PY: AS_Router {
+            parameters:
+                @display("t=[PARAGUAY];is=vs");
+                latitude = -22;
+                longitude = -60;
+                country = "PY";
+        }
+
+        asRouter_AP: AS_Router {
+            parameters:
+                @display("t=[];is=vs");
+                latitude = 35;
+                longitude = 105;
+                country = "AP";
+        }
+
+        asRouter_AM: AS_Router {
+            parameters:
+                @display("t=[ARMENIA];is=vs;p=1026,229");
+                latitude = 40;
+                longitude = 45;
+                country = "AM";
+        }
+
+        asRouter_AN: AS_Router {
+            parameters:
+                @display("t=[NETHERLANDS ANTILLES];is=vs");
+                latitude = 12;
+                longitude = -69;
+                country = "AN";
+        }
+
+        asRouter_JP: AS_Router {
+            parameters:
+                @display("t=[JAPAN];is=vs;p=1426,115");
+                latitude = 36;
+                longitude = 140;
+                country = "JP";
+        }
+
+        asRouter_BY: AS_Router {
+            parameters:
+                @display("t=[BELARUS];is=vs;p=167,166");
+                latitude = 54;
+                longitude = 28;
+                country = "BY";
+        }
+
+        asRouter_JO: AS_Router {
+            parameters:
+                @display("t=[JORDAN];is=vs;p=1015,300");
+                latitude = 32;
+                longitude = 36;
+                country = "JO";
+        }
+
+        asRouter_BS: AS_Router {
+            parameters:
+                @display("t=[BAHAMAS];is=vs");
+                latitude = 25;
+                longitude = -77;
+                country = "BS";
+        }
+
+        asRouter_TJ: AS_Router {
+            parameters:
+                @display("t=[TAJIKISTAN];is=vs");
+                latitude = 39;
+                longitude = 69;
+                country = "TJ";
+        }
+
+        asRouter_JM: AS_Router {
+            parameters:
+                @display("t=[JAMAICA];is=vs");
+                latitude = 18;
+                longitude = -77;
+                country = "JM";
+        }
+
+        asRouter_TH: AS_Router {
+            parameters:
+                @display("t=[THAILAND];is=vs");
+                latitude = 8;
+                longitude = 98;
+                country = "TH";
+        }
+
+        asRouter_TN: AS_Router {
+            parameters:
+                @display("t=[TUNISIA];is=vs;p=837,379");
+                latitude = 34;
+                longitude = 9;
+                country = "TN";
+        }
+
+        asRouter_CA: AS_Router {
+            parameters:
+                @display("t=[CANADA];is=vs;p=386,149");
+                latitude = 44;
+                longitude = -79;
+                country = "CA";
+        }
+
+        asRouter_TR: AS_Router {
+            parameters:
+                @display("t=[TURKEY];is=vs");
+                latitude = 41;
+                longitude = 29;
+                country = "TR";
+        }
+
+        asRouter_BZ: AS_Router {
+            parameters:
+                @display("t=[BELIZE];is=vs");
+                latitude = 17;
+                longitude = -89;
+                country = "BZ";
+        }
+
+        asRouter_BF: AS_Router {
+            parameters:
+                @display("t=[BURKINA FASO];is=vs");
+                latitude = 13;
+                longitude = -2;
+                country = "BF";
+        }
+
+        asRouter_SV: AS_Router {
+            parameters:
+                @display("t=[EL SALVADOR];is=vs");
+                latitude = 14;
+                longitude = -89;
+                country = "SV";
+        }
+
+        asRouter_BG: AS_Router {
+            parameters:
+                @display("t=[BULGARIA];is=vs");
+                latitude = 42;
+                longitude = 23;
+                country = "BG";
+        }
+
+        asRouter_BH: AS_Router {
+            parameters:
+                @display("t=[BAHRAIN];is=vs");
+                latitude = 26;
+                longitude = 51;
+                country = "BH";
+        }
+
+        asRouter_BB: AS_Router {
+            parameters:
+                @display("t=[BARBADOS];is=vs");
+                latitude = 13;
+                longitude = -60;
+                country = "BB";
+        }
+
+        asRouter_BD: AS_Router {
+            parameters:
+                @display("t=[BANGLADESH];is=vs;p=1236,354");
+                latitude = 24;
+                longitude = 90;
+                country = "BD";
+        }
+
+        asRouter_BE: AS_Router {
+            parameters:
+                @display("t=[BELGIUM];is=vs");
+                latitude = 51;
+                longitude = 3;
+                country = "BE";
+        }
+
+        asRouter_BN: AS_Router {
+            parameters:
+                @display("t=[BRUNEI DARUSSALAM];is=vs");
+                latitude = 5;
+                longitude = 115;
+                country = "BN";
+        }
+
+        asRouter_BO: AS_Router {
+            parameters:
+                @display("t=[BOLIVIA];is=vs");
+                latitude = -12;
+                longitude = -66;
+                country = "BO";
+        }
+
+        asRouter_KH: AS_Router {
+            parameters:
+                @display("t=[CAMBODIA];is=vs");
+                latitude = 12;
+                longitude = 105;
+                country = "KH";
+        }
+
+        asRouter_KG: AS_Router {
+            parameters:
+                @display("t=[KYRGYZSTAN];is=vs;p=639,40");
+                latitude = 43;
+                longitude = 75;
+                country = "KG";
+        }
+
+        asRouter_KE: AS_Router {
+            parameters:
+                @display("t=[KENYA];is=vs;p=900,428");
+                latitude = 1;
+                longitude = 38;
+                country = "KE";
+        }
+
+        asRouter_BM: AS_Router {
+            parameters:
+                @display("t=[BERMUDA];is=vs;p=319,305");
+                latitude = 32;
+                longitude = -65;
+                country = "BM";
+        }
+
+        asRouter_SD: AS_Router {
+            parameters:
+                @display("t=[SUDAN];is=vs");
+                latitude = 15;
+                longitude = 30;
+                country = "SD";
+        }
+
+        asRouter_CZ: AS_Router {
+            parameters:
+                @display("t=[CZECH REPUBLIC];is=vs");
+                latitude = 50;
+                longitude = 14;
+                country = "CZ";
+        }
+
+        asRouter_SC: AS_Router {
+            parameters:
+                @display("t=[SEYCHELLES];is=vs");
+                latitude = -5;
+                longitude = 56;
+                country = "SC";
+        }
+
+        asRouter_CY: AS_Router {
+            parameters:
+                @display("t=[CYPRUS];is=vs");
+                latitude = 35;
+                longitude = 33;
+                country = "CY";
+        }
+
+        asRouter_SE: AS_Router {
+            parameters:
+                @display("t=[SWEDEN];is=vs;p=1028,126");
+                latitude = 59;
+                longitude = 18;
+                country = "SE";
+        }
+
+        asRouter_KR: AS_Router {
+            parameters:
+                @display("t=[KOREA  REPUBLIC OF];is=vs;p=1354,126");
+                latitude = 37;
+                longitude = 127;
+                country = "KR";
+        }
+
+        asRouter_SG: AS_Router {
+            parameters:
+                @display("t=[SINGAPORE];is=vs");
+                latitude = 1;
+                longitude = 104;
+                country = "SG";
+        }
+
+        asRouter_KM: AS_Router {
+            parameters:
+                @display("t=[COMOROS];is=vs");
+                latitude = -12;
+                longitude = 44;
+                country = "KM";
+        }
+
+        asRouter_SI: AS_Router {
+            parameters:
+                @display("t=[SLOVENIA];is=vs");
+                latitude = 46;
+                longitude = 15;
+                country = "SI";
+        }
+
+        asRouter_SL: AS_Router {
+            parameters:
+                @display("t=[SIERRA LEONE];is=vs");
+                latitude = 8;
+                longitude = -12;
+                country = "SL";
+        }
+
+        asRouter_KW: AS_Router {
+            parameters:
+                @display("t=[KUWAIT];is=vs");
+                latitude = 29;
+                longitude = 48;
+                country = "KW";
+        }
+
+        asRouter_SK: AS_Router {
+            parameters:
+                @display("t=[SLOVAKIA (Slovak Republic)];is=vs");
+                latitude = 48;
+                longitude = 17;
+                country = "SK";
+        }
+
+        asRouter_KY: AS_Router {
+            parameters:
+                @display("t=[CAYMAN ISLANDS];is=vs;p=371,273");
+                latitude = 19;
+                longitude = -81;
+                country = "KY";
+        }
+
+        asRouter_SM: AS_Router {
+            parameters:
+                @display("t=[SAN MARINO];is=vs");
+                latitude = 44;
+                longitude = 12;
+                country = "SM";
+        }
+
+        asRouter_KZ: AS_Router {
+            parameters:
+                @display("t=[KAZAKHSTAN];is=vs");
+                latitude = 52;
+                longitude = 75;
+                country = "KZ";
+        }
+
+        asRouter_SO: AS_Router {
+            parameters:
+                @display("t=[SOMALIA];is=vs");
+                latitude = 10;
+                longitude = 49;
+                country = "SO";
+        }
+
+        asRouter_LA: AS_Router {
+            parameters:
+                @display("t=[LAOS ];is=vs");
+                latitude = 18;
+                longitude = 103;
+                country = "LA";
+        }
+
+        asRouter_RS: AS_Router {
+            parameters:
+                @display("t=[SERBIA];is=vs");
+                latitude = 45;
+                longitude = 20;
+                country = "RS";
+        }
+
+        asRouter_RU: AS_Router {
+            parameters:
+                @display("t=[RUSSIAN FEDERATION];is=vs;p=1277,117");
+                latitude = 56;
+                longitude = 38;
+                country = "RU";
+        }
+
+        asRouter_CH: AS_Router {
+            parameters:
+                @display("t=[SWITZERLAND];is=vs");
+                latitude = 46;
+                longitude = 6;
+                country = "CH";
+        }
+
+        asRouter_LB: AS_Router {
+            parameters:
+                @display("t=[LEBANON];is=vs");
+                latitude = 34;
+                longitude = 36;
+                country = "LB";
+        }
+
+        asRouter_RW: AS_Router {
+            parameters:
+                @display("t=[RWANDA];is=vs");
+                latitude = -2;
+                longitude = 30;
+                country = "RW";
+        }
+
+        asRouter_CD: AS_Router {
+            parameters:
+                @display("t=[CONGO  THE DRC];is=vs");
+                latitude = 0;
+                longitude = 25;
+                country = "CD";
+        }
+
+        asRouter_LI: AS_Router {
+            parameters:
+                @display("t=[LIECHTENSTEIN];is=vs");
+                latitude = 47;
+                longitude = 10;
+                country = "LI";
+        }
+
+        asRouter_CR: AS_Router {
+            parameters:
+                @display("t=[COSTA RICA];is=vs");
+                latitude = 10;
+                longitude = -84;
+                country = "CR";
+        }
+
+        asRouter_CO: AS_Router {
+            parameters:
+                @display("t=[COLOMBIA];is=vs;p=494,466");
+                latitude = 5;
+                longitude = -74;
+                country = "CO";
+        }
+
+        asRouter_CN: AS_Router {
+            parameters:
+                @display("t=[CHINA];is=vs;p=1277,249");
+                latitude = 40;
+                longitude = 116;
+                country = "CN";
+        }
+
+        asRouter_SA: AS_Router {
+            parameters:
+                @display("t=[SAUDI ARABIA];is=vs");
+                latitude = 25;
+                longitude = 47;
+                country = "SA";
+        }
+
+        asRouter_CL: AS_Router {
+            parameters:
+                @display("t=[CHILE];is=vs");
+                latitude = -33;
+                longitude = -71;
+                country = "CL";
+        }
+
+
+    connections:
+        asRouter_IT.ethg++ <--> gigabitline <--> asRouter_SM.ethg++;
+        asRouter_DK.ethg++ <--> gigabitline <--> asRouter_SE.ethg++;
+        asRouter_AT.ethg++ <--> gigabitline <--> asRouter_HR.ethg++;
+        asRouter_AX.ethg++ <--> gigabitline <--> asRouter_SE.ethg++;
+        asRouter_BE.ethg++ <--> gigabitline <--> asRouter_NL.ethg++;
+        asRouter_BG.ethg++ <--> gigabitline <--> asRouter_MK.ethg++;
+        asRouter_CH.ethg++ <--> gigabitline <--> asRouter_FR.ethg++;
+        asRouter_CH.ethg++ <--> gigabitline <--> asRouter_EU.ethg++;
+        asRouter_GE.ethg++ <--> gigabitline <--> asRouter_AM.ethg++;
+        //asRouter_HU.ethg++ <--> gigabitline <--> asRouter_SK.ethg++;
+        asRouter_LV.ethg++ <--> gigabitline <--> asRouter_LT.ethg++;
+        asRouter_RO.ethg++ <--> gigabitline <--> asRouter_BG.ethg++;
+        asRouter_SI.ethg++ <--> gigabitline <--> asRouter_HR.ethg++;
+        asRouter_AT.ethg++ <--> gigabitline <--> asRouter_SI.ethg++;
+        asRouter_AT.ethg++ <--> gigabitline <--> asRouter_CZ.ethg++;
+        asRouter_BA.ethg++ <--> gigabitline <--> asRouter_SI.ethg++;
+        asRouter_BE.ethg++ <--> gigabitline <--> asRouter_LU.ethg++;
+        asRouter_DE.ethg++ <--> gigabitline <--> asRouter_LU.ethg++;
+        asRouter_EU.ethg++ <--> gigabitline <--> asRouter_MC.ethg++;
+        asRouter_FI.ethg++ <--> gigabitline <--> asRouter_LV.ethg++;
+        asRouter_GB.ethg++ <--> gigabitline <--> asRouter_IM.ethg++;
+        asRouter_LT.ethg++ <--> gigabitline <--> asRouter_RU.ethg++;
+        asRouter_ME.ethg++ <--> gigabitline <--> asRouter_RS.ethg++;
+        asRouter_NL.ethg++ <--> gigabitline <--> asRouter_LU.ethg++;
+        asRouter_AF.ethg++ <--> gigabitline <--> asRouter_TJ.ethg++;
+        asRouter_CH.ethg++ <--> gigabitline <--> asRouter_LI.ethg++;
+        asRouter_CH.ethg++ <--> gigabitline <--> asRouter_LU.ethg++;
+        asRouter_DE.ethg++ <--> gigabitline <--> asRouter_LI.ethg++;
+        asRouter_DE.ethg++ <--> gigabitline <--> asRouter_EU.ethg++;
+        asRouter_DK.ethg++ <--> gigabitline <--> asRouter_NO.ethg++;
+        asRouter_ES.ethg++ <--> gigabitline <--> asRouter_GI.ethg++;
+        asRouter_HU.ethg++ <--> gigabitline <--> asRouter_SI.ethg++;
+        asRouter_IT.ethg++ <--> gigabitline <--> asRouter_SI.ethg++;
+        asRouter_MD.ethg++ <--> gigabitline <--> asRouter_UA.ethg++;
+        asRouter_MD.ethg++ <--> gigabitline <--> asRouter_RO.ethg++;
+        asRouter_PL.ethg++ <--> gigabitline <--> asRouter_SK.ethg++;
+        asRouter_SK.ethg++ <--> gigabitline <--> asRouter_CZ.ethg++;
+        asRouter_TR.ethg++ <--> gigabitline <--> asRouter_RO.ethg++;
+        asRouter_AT.ethg++ <--> gigabitline <--> asRouter_DE.ethg++;
+        asRouter_AT.ethg++ <--> gigabitline <--> asRouter_PL.ethg++;
+        asRouter_BE.ethg++ <--> gigabitline <--> asRouter_FR.ethg++;
+        asRouter_CZ.ethg++ <--> gigabitline <--> asRouter_DE.ethg++;
+        asRouter_DE.ethg++ <--> gigabitline <--> asRouter_NL.ethg++;
+        asRouter_DE.ethg++ <--> gigabitline <--> asRouter_DK.ethg++;
+        asRouter_EE.ethg++ <--> gigabitline <--> asRouter_LT.ethg++;
+        asRouter_ES.ethg++ <--> gigabitline <--> asRouter_PT.ethg++;
+        asRouter_FI.ethg++ <--> gigabitline <--> asRouter_RU.ethg++;
+        asRouter_GR.ethg++ <--> gigabitline <--> asRouter_BG.ethg++;
+        asRouter_HU.ethg++ <--> gigabitline <--> asRouter_AT.ethg++;
+        asRouter_HU.ethg++ <--> gigabitline <--> asRouter_PL.ethg++;
+        asRouter_IT.ethg++ <--> gigabitline <--> asRouter_LI.ethg++;
+        asRouter_IT.ethg++ <--> gigabitline <--> asRouter_AT.ethg++;
+        asRouter_LA.ethg++ <--> gigabitline <--> asRouter_TH.ethg++;
+        asRouter_BE.ethg++ <--> gigabitline <--> asRouter_EU.ethg++;
+        asRouter_BE.ethg++ <--> gigabitline <--> asRouter_GB.ethg++;
+        asRouter_BE.ethg++ <--> gigabitline <--> asRouter_CH.ethg++;
+        asRouter_CH.ethg++ <--> gigabitline <--> asRouter_NL.ethg++;
+        asRouter_CZ.ethg++ <--> gigabitline <--> asRouter_HU.ethg++;
+        asRouter_CZ.ethg++ <--> gigabitline <--> asRouter_PL.ethg++;
+        asRouter_CZ.ethg++ <--> gigabitline <--> asRouter_DK.ethg++;
+        asRouter_EU.ethg++ <--> gigabitline <--> asRouter_IT.ethg++;
+        asRouter_EU.ethg++ <--> gigabitline <--> asRouter_FR.ethg++;
+        asRouter_EU.ethg++ <--> gigabitline <--> asRouter_NL.ethg++;
+        asRouter_FI.ethg++ <--> gigabitline <--> asRouter_LT.ethg++;
+        asRouter_FR.ethg++ <--> gigabitline <--> asRouter_LU.ethg++;
+        asRouter_FR.ethg++ <--> gigabitline <--> asRouter_GB.ethg++;
+        asRouter_HU.ethg++ <--> gigabitline <--> asRouter_BG.ethg++;
+        asRouter_IT.ethg++ <--> gigabitline <--> asRouter_SK.ethg++;
+        asRouter_NO.ethg++ <--> gigabitline <--> asRouter_SE.ethg++;
+        asRouter_TR.ethg++ <--> gigabitline <--> asRouter_BG.ethg++;
+        asRouter_AT.ethg++ <--> gigabitline <--> asRouter_CH.ethg++;
+        asRouter_BE.ethg++ <--> gigabitline <--> asRouter_LI.ethg++;
+        asRouter_CD.ethg++ <--> gigabitline <--> asRouter_UG.ethg++;
+        asRouter_CH.ethg++ <--> gigabitline <--> asRouter_IT.ethg++;
+        asRouter_CZ.ethg++ <--> gigabitline <--> asRouter_EU.ethg++;
+        asRouter_CZ.ethg++ <--> gigabitline <--> asRouter_IT.ethg++;
+        asRouter_DE.ethg++ <--> gigabitline <--> asRouter_FR.ethg++;
+        asRouter_EG.ethg++ <--> gigabitline <--> asRouter_JO.ethg++;
+        asRouter_FR.ethg++ <--> gigabitline <--> asRouter_NL.ethg++;
+        asRouter_GB.ethg++ <--> gigabitline <--> asRouter_NL.ethg++;
+        asRouter_GB.ethg++ <--> gigabitline <--> asRouter_IE.ethg++;
+        asRouter_GR.ethg++ <--> gigabitline <--> asRouter_RO.ethg++;
+        asRouter_MD.ethg++ <--> gigabitline <--> asRouter_BG.ethg++;
+        asRouter_PL.ethg++ <--> gigabitline <--> asRouter_LT.ethg++;
+        asRouter_PL.ethg++ <--> gigabitline <--> asRouter_LV.ethg++;
+        asRouter_PL.ethg++ <--> gigabitline <--> asRouter_SI.ethg++;
+        asRouter_PL.ethg++ <--> gigabitline <--> asRouter_HR.ethg++;
+        asRouter_SE.ethg++ <--> gigabitline <--> asRouter_LV.ethg++;
+        asRouter_SE.ethg++ <--> gigabitline <--> asRouter_EE.ethg++;
+        asRouter_TR.ethg++ <--> gigabitline <--> asRouter_CY.ethg++;
+        asRouter_AZ.ethg++ <--> gigabitline <--> asRouter_IR.ethg++;
+        asRouter_BE.ethg++ <--> gigabitline <--> asRouter_DK.ethg++;
+        asRouter_CA.ethg++ <--> gigabitline <--> asRouter_US.ethg++;
+        asRouter_DK.ethg++ <--> gigabitline <--> asRouter_NL.ethg++;
+        asRouter_ES.ethg++ <--> gigabitline <--> asRouter_FR.ethg++;
+        asRouter_HK.ethg++ <--> gigabitline <--> asRouter_TW.ethg++;
+        asRouter_HU.ethg++ <--> gigabitline <--> asRouter_RO.ethg++;
+        asRouter_ID.ethg++ <--> gigabitline <--> asRouter_SG.ethg++;
+        asRouter_KE.ethg++ <--> gigabitline <--> asRouter_TZ.ethg++;
+        asRouter_MK.ethg++ <--> gigabitline <--> asRouter_SI.ethg++;
+        asRouter_RO.ethg++ <--> gigabitline <--> asRouter_HR.ethg++;
+        asRouter_SG.ethg++ <--> gigabitline <--> asRouter_TH.ethg++;
+        asRouter_DK.ethg++ <--> gigabitline <--> asRouter_AX.ethg++;
+        asRouter_DK.ethg++ <--> gigabitline <--> asRouter_LU.ethg++;
+        asRouter_FO.ethg++ <--> gigabitline <--> asRouter_GB.ethg++;
+        asRouter_GB.ethg++ <--> gigabitline <--> asRouter_LU.ethg++;
+        asRouter_KE.ethg++ <--> gigabitline <--> asRouter_RW.ethg++;
+        asRouter_LV.ethg++ <--> gigabitline <--> asRouter_UA.ethg++;
+        asRouter_MY.ethg++ <--> gigabitline <--> asRouter_SG.ethg++;
+        asRouter_RO.ethg++ <--> gigabitline <--> asRouter_UA.ethg++;
+        asRouter_RU.ethg++ <--> gigabitline <--> asRouter_UA.ethg++;
+        asRouter_SE.ethg++ <--> gigabitline <--> asRouter_LT.ethg++;
+        asRouter_TR.ethg++ <--> gigabitline <--> asRouter_UA.ethg++;
+        asRouter_GR.ethg++ <--> gigabitline <--> asRouter_CY.ethg++;
+        asRouter_HU.ethg++ <--> gigabitline <--> asRouter_LI.ethg++;
+        asRouter_SG.ethg++ <--> gigabitline <--> asRouter_VN.ethg++;
+        asRouter_TR.ethg++ <--> gigabitline <--> asRouter_LB.ethg++;
+        asRouter_CN.ethg++ <--> gigabitline <--> asRouter_KR.ethg++;
+        asRouter_FI.ethg++ <--> gigabitline <--> asRouter_SE.ethg++;
+        asRouter_ID.ethg++ <--> gigabitline <--> asRouter_MY.ethg++;
+        asRouter_LB.ethg++ <--> gigabitline <--> asRouter_AM.ethg++;
+        asRouter_SE.ethg++ <--> gigabitline <--> asRouter_SK.ethg++;
+        asRouter_UA.ethg++ <--> gigabitline <--> asRouter_BG.ethg++;
+        asRouter_UA.ethg++ <--> gigabitline <--> asRouter_EE.ethg++;
+        asRouter_BN.ethg++ <--> gigabitline <--> asRouter_SG.ethg++;
+        asRouter_CN.ethg++ <--> gigabitline <--> asRouter_AP.ethg++;
+        asRouter_GR.ethg++ <--> gigabitline <--> asRouter_UA.ethg++;
+        asRouter_IE.ethg++ <--> gigabitline <--> asRouter_PT.ethg++;
+        asRouter_MD.ethg++ <--> gigabitline <--> asRouter_SK.ethg++;
+        asRouter_MD.ethg++ <--> gigabitline <--> asRouter_RU.ethg++;
+        asRouter_US.ethg++ <--> gigabitline <--> asRouter_BM.ethg++;
+        asRouter_FI.ethg++ <--> gigabitline <--> asRouter_NO.ethg++;
+        asRouter_GB.ethg++ <--> gigabitline <--> asRouter_LI.ethg++;
+        asRouter_GR.ethg++ <--> gigabitline <--> asRouter_IL.ethg++;
+        asRouter_IE.ethg++ <--> gigabitline <--> asRouter_LU.ethg++;
+        asRouter_JP.ethg++ <--> gigabitline <--> asRouter_KR.ethg++;
+        asRouter_KR.ethg++ <--> gigabitline <--> asRouter_TW.ethg++;
+        asRouter_MD.ethg++ <--> gigabitline <--> asRouter_CY.ethg++;
+        asRouter_MD.ethg++ <--> gigabitline <--> asRouter_SI.ethg++;
+        asRouter_ES.ethg++ <--> gigabitline <--> asRouter_IE.ethg++;
+        asRouter_ES.ethg++ <--> gigabitline <--> asRouter_IM.ethg++;
+        asRouter_MD.ethg++ <--> gigabitline <--> asRouter_FI.ethg++;
+        asRouter_SK.ethg++ <--> gigabitline <--> asRouter_EE.ethg++;
+        asRouter_TR.ethg++ <--> gigabitline <--> asRouter_SK.ethg++;
+        asRouter_ES.ethg++ <--> gigabitline <--> asRouter_LI.ethg++;
+        asRouter_LV.ethg++ <--> gigabitline <--> asRouter_RU.ethg++;
+        asRouter_NI.ethg++ <--> gigabitline <--> asRouter_US.ethg++;
+        asRouter_NO.ethg++ <--> gigabitline <--> asRouter_LV.ethg++;
+        asRouter_RU.ethg++ <--> gigabitline <--> asRouter_GE.ethg++;
+        asRouter_TR.ethg++ <--> gigabitline <--> asRouter_GE.ethg++;
+        asRouter_FI.ethg++ <--> gigabitline <--> asRouter_RO.ethg++;
+        asRouter_HK.ethg++ <--> gigabitline <--> asRouter_AP.ethg++;
+        asRouter_TW.ethg++ <--> gigabitline <--> asRouter_CN.ethg++;
+        asRouter_CR.ethg++ <--> gigabitline <--> asRouter_US.ethg++;
+        asRouter_GR.ethg++ <--> gigabitline <--> asRouter_LT.ethg++;
+        asRouter_IE.ethg++ <--> gigabitline <--> asRouter_MC.ethg++;
+        asRouter_IE.ethg++ <--> gigabitline <--> asRouter_LI.ethg++;
+        asRouter_IE.ethg++ <--> gigabitline <--> asRouter_GI.ethg++;
+        asRouter_NO.ethg++ <--> gigabitline <--> asRouter_LT.ethg++;
+        asRouter_TR.ethg++ <--> gigabitline <--> asRouter_RU.ethg++;
+        asRouter_CN.ethg++ <--> gigabitline <--> asRouter_HK.ethg++;
+        asRouter_FI.ethg++ <--> gigabitline <--> asRouter_BG.ethg++;
+        asRouter_IE.ethg++ <--> gigabitline <--> asRouter_NO.ethg++;
+        asRouter_KZ.ethg++ <--> gigabitline <--> asRouter_PK.ethg++;
+        asRouter_RU.ethg++ <--> gigabitline <--> asRouter_AZ.ethg++;
+        asRouter_BS.ethg++ <--> gigabitline <--> asRouter_CA.ethg++;
+        asRouter_CA.ethg++ <--> gigabitline <--> asRouter_BM.ethg++;
+        asRouter_GR.ethg++ <--> gigabitline <--> asRouter_LV.ethg++;
+        asRouter_HK.ethg++ <--> gigabitline <--> asRouter_KR.ethg++;
+        asRouter_MY.ethg++ <--> gigabitline <--> asRouter_HK.ethg++;
+        asRouter_MY.ethg++ <--> gigabitline <--> asRouter_CN.ethg++;
+        asRouter_BN.ethg++ <--> gigabitline <--> asRouter_TW.ethg++;
+        asRouter_GR.ethg++ <--> gigabitline <--> asRouter_IQ.ethg++;
+        asRouter_JP.ethg++ <--> gigabitline <--> asRouter_TW.ethg++;
+        asRouter_TW.ethg++ <--> gigabitline <--> asRouter_VN.ethg++;
+        asRouter_AM.ethg++ <--> gigabitline <--> asRouter_OM.ethg++;
+        asRouter_BF.ethg++ <--> gigabitline <--> asRouter_MA.ethg++;
+        asRouter_ES.ethg++ <--> gigabitline <--> asRouter_FO.ethg++;
+        asRouter_ID.ethg++ <--> gigabitline <--> asRouter_VN.ethg++;
+        asRouter_HK.ethg++ <--> gigabitline <--> asRouter_SG.ethg++;
+        asRouter_KR.ethg++ <--> gigabitline <--> asRouter_AP.ethg++;
+        asRouter_BS.ethg++ <--> gigabitline <--> asRouter_US.ethg++;
+        asRouter_CN.ethg++ <--> gigabitline <--> asRouter_JP.ethg++;
+        asRouter_GT.ethg++ <--> gigabitline <--> asRouter_US.ethg++;
+        asRouter_KY.ethg++ <--> gigabitline <--> asRouter_US.ethg++;
+        asRouter_MY.ethg++ <--> gigabitline <--> asRouter_TW.ethg++;
+        asRouter_TW.ethg++ <--> gigabitline <--> asRouter_TH.ethg++;
+        asRouter_US.ethg++ <--> gigabitline <--> asRouter_DO.ethg++;
+        asRouter_ES.ethg++ <--> gigabitline <--> asRouter_NO.ethg++;
+        asRouter_ID.ethg++ <--> gigabitline <--> asRouter_PH.ethg++;
+        asRouter_AP.ethg++ <--> gigabitline <--> asRouter_PH.ethg++;
+        asRouter_HK.ethg++ <--> gigabitline <--> asRouter_JP.ethg++;
+        asRouter_CA.ethg++ <--> gigabitline <--> asRouter_PR.ethg++;
+        asRouter_ID.ethg++ <--> gigabitline <--> asRouter_HK.ethg++;
+        asRouter_IN.ethg++ <--> gigabitline <--> asRouter_SG.ethg++;
+        asRouter_CA.ethg++ <--> gigabitline <--> asRouter_HN.ethg++;
+        asRouter_CA.ethg++ <--> gigabitline <--> asRouter_GT.ethg++;
+        asRouter_CN.ethg++ <--> gigabitline <--> asRouter_BD.ethg++;
+        asRouter_NO.ethg++ <--> gigabitline <--> asRouter_PT.ethg++;
+        asRouter_AG.ethg++ <--> gigabitline <--> asRouter_CA.ethg++;
+        asRouter_AU.ethg++ <--> gigabitline <--> asRouter_ID.ethg++;
+        asRouter_CA.ethg++ <--> gigabitline <--> asRouter_AN.ethg++;
+        asRouter_MY.ethg++ <--> gigabitline <--> asRouter_AP.ethg++;
+        asRouter_ZA.ethg++ <--> gigabitline <--> asRouter_KE.ethg++;
+        asRouter_KR.ethg++ <--> gigabitline <--> asRouter_VN.ethg++;
+        asRouter_KZ.ethg++ <--> gigabitline <--> asRouter_AP.ethg++;
+        asRouter_MY.ethg++ <--> gigabitline <--> asRouter_GU.ethg++;
+        asRouter_BN.ethg++ <--> gigabitline <--> asRouter_KR.ethg++;
+        asRouter_ID.ethg++ <--> gigabitline <--> asRouter_IN.ethg++;
+        asRouter_KE.ethg++ <--> gigabitline <--> asRouter_NG.ethg++;
+        asRouter_KZ.ethg++ <--> gigabitline <--> asRouter_KW.ethg++;
+        asRouter_KR.ethg++ <--> gigabitline <--> asRouter_TH.ethg++;
+        asRouter_BN.ethg++ <--> gigabitline <--> asRouter_JP.ethg++;
+        asRouter_GA.ethg++ <--> gigabitline <--> asRouter_MA.ethg++;
+        asRouter_KZ.ethg++ <--> gigabitline <--> asRouter_IN.ethg++;
+        asRouter_KZ.ethg++ <--> gigabitline <--> asRouter_SA.ethg++;
+        asRouter_AU.ethg++ <--> gigabitline <--> asRouter_SG.ethg++;
+        asRouter_ID.ethg++ <--> gigabitline <--> asRouter_AP.ethg++;
+        asRouter_KE.ethg++ <--> gigabitline <--> asRouter_GH.ethg++;
+        asRouter_AR.ethg++ <--> gigabitline <--> asRouter_CO.ethg++;
+        asRouter_AU.ethg++ <--> gigabitline <--> asRouter_GU.ethg++;
+        asRouter_JP.ethg++ <--> gigabitline <--> asRouter_VN.ethg++;
+        asRouter_AM.ethg++ <--> gigabitline <--> asRouter_IN.ethg++;
+        asRouter_JP.ethg++ <--> gigabitline <--> asRouter_MY.ethg++;
+        asRouter_KZ.ethg++ <--> gigabitline <--> asRouter_CN.ethg++;
+        asRouter_PT.ethg++ <--> gigabitline <--> asRouter_IL.ethg++;
+        asRouter_KE.ethg++ <--> gigabitline <--> asRouter_DZ.ethg++;
+        asRouter_JP.ethg++ <--> gigabitline <--> asRouter_TH.ethg++;
+        asRouter_KZ.ethg++ <--> gigabitline <--> asRouter_IL.ethg++;
+        asRouter_IL.ethg++ <--> gigabitline <--> asRouter_A2.ethg++;
+        asRouter_KZ.ethg++ <--> gigabitline <--> asRouter_VN.ethg++;
+        asRouter_AR.ethg++ <--> gigabitline <--> asRouter_PA.ethg++;
+        asRouter_AM.ethg++ <--> gigabitline <--> asRouter_GI.ethg++;
+        asRouter_KE.ethg++ <--> gigabitline <--> asRouter_SL.ethg++;
+        asRouter_AM.ethg++ <--> gigabitline <--> asRouter_IM.ethg++;
+        asRouter_IQ.ethg++ <--> gigabitline <--> asRouter_PT.ethg++;
+        asRouter_AM.ethg++ <--> gigabitline <--> asRouter_FO.ethg++;
+        asRouter_PT.ethg++ <--> gigabitline <--> asRouter_SA.ethg++;
+        asRouter_BZ.ethg++ <--> gigabitline <--> asRouter_AR.ethg++;
+        asRouter_PT.ethg++ <--> gigabitline <--> asRouter_KE.ethg++;
+        asRouter_AM.ethg++ <--> gigabitline <--> asRouter_TH.ethg++;
+        asRouter_FK.ethg++ <--> gigabitline <--> asRouter_MQ.ethg++;
+        asRouter_AU.ethg++ <--> gigabitline <--> asRouter_AP.ethg++;
+        asRouter_AU.ethg++ <--> gigabitline <--> asRouter_IN.ethg++;
+        asRouter_FK.ethg++ <--> gigabitline <--> asRouter_KY.ethg++;
+        asRouter_PT.ethg++ <--> gigabitline <--> asRouter_PK.ethg++;
+        asRouter_FK.ethg++ <--> gigabitline <--> asRouter_BM.ethg++;
+        asRouter_AU.ethg++ <--> gigabitline <--> asRouter_AF.ethg++;
+        asRouter_AU.ethg++ <--> gigabitline <--> asRouter_SO.ethg++;
+        asRouter_AU.ethg++ <--> gigabitline <--> asRouter_SA.ethg++;
+        asRouter_AF.ethg++ <--> gigabitline <--> asRouter_MH.ethg++;
+        asRouter_EE.ethg++ <--> gigabitline <--> asRouter_PH.ethg++;
+        asRouter_FK.ethg++ <--> gigabitline <--> asRouter_MC.ethg++;
+        asRouter_FK.ethg++ <--> gigabitline <--> asRouter_IL.ethg++;
+        asRouter_FK.ethg++ <--> gigabitline <--> asRouter_AE.ethg++;
+        asRouter_A2.ethg++ <--> gigabitline <--> asRouter_AS.ethg++;
+        asRouter_AF.ethg++ <--> gigabitline <--> asRouter_WS.ethg++;
+
+        asRouter_SD.ethg++ <--> gigabitline <--> asRouter_GB.ethg++;
+        asRouter_RE.ethg++ <--> gigabitline <--> asRouter_FR.ethg++;
+        asRouter_JE.ethg++ <--> gigabitline <--> asRouter_A1.ethg++;
+        asRouter_GB.ethg++ <--> gigabitline <--> asRouter_TN.ethg++;
+        asRouter_FM.ethg++ <--> gigabitline <--> asRouter_ID.ethg++;
+        asRouter_VE.ethg++ <--> gigabitline <--> asRouter_EU.ethg++;
+        asRouter_AL.ethg++ <--> gigabitline <--> asRouter_A1.ethg++;
+        asRouter_AO.ethg++ <--> gigabitline <--> asRouter_FR.ethg++;
+        asRouter_AW.ethg++ <--> gigabitline <--> asRouter_IE.ethg++;
+        asRouter_BY.ethg++ <--> gigabitline <--> asRouter_US.ethg++;
+        asRouter_PF.ethg++ <--> gigabitline <--> asRouter_US.ethg++;
+        asRouter_RU.ethg++ <--> gigabitline <--> asRouter_KG.ethg++;
+        asRouter_SV.ethg++ <--> gigabitline <--> asRouter_A1.ethg++;
+        asRouter_MY.ethg++ <--> gigabitline <--> asRouter_NZ.ethg++;
+        asRouter_JM.ethg++ <--> gigabitline <--> asRouter_US.ethg++;
+        asRouter_KM.ethg++ <--> gigabitline <--> asRouter_US.ethg++;
+        asRouter_UZ.ethg++ <--> gigabitline <--> asRouter_RU.ethg++;
+        asRouter_BE.ethg++ <--> gigabitline <--> asRouter_MU.ethg++;
+        asRouter_MT.ethg++ <--> gigabitline <--> asRouter_GB.ethg++;
+        asRouter_PY.ethg++ <--> gigabitline <--> asRouter_FR.ethg++;
+        asRouter_BH.ethg++ <--> gigabitline <--> asRouter_GB.ethg++;
+        asRouter_MX.ethg++ <--> gigabitline <--> asRouter_US.ethg++;
+        asRouter_MG.ethg++ <--> gigabitline <--> asRouter_SE.ethg++;
+        asRouter_CL.ethg++ <--> gigabitline <--> asRouter_CA.ethg++;
+        asRouter_VI.ethg++ <--> gigabitline <--> asRouter_US.ethg++;
+        asRouter_KZ.ethg++ <--> gigabitline <--> asRouter_EG.ethg++;
+        asRouter_TT.ethg++ <--> gigabitline <--> asRouter_CA.ethg++;
+        asRouter_IS.ethg++ <--> gigabitline <--> asRouter_IE.ethg++;
+        asRouter_BB.ethg++ <--> gigabitline <--> asRouter_IE.ethg++;
+        asRouter_CD.ethg++ <--> gigabitline <--> asRouter_A1.ethg++;
+        asRouter_A1.ethg++ <--> gigabitline <--> asRouter_US.ethg++;
+        asRouter_ES.ethg++ <--> gigabitline <--> asRouter_SC.ethg++;
+        asRouter_A1.ethg++ <--> gigabitline <--> asRouter_VG.ethg++;
+        asRouter_A1.ethg++ <--> gigabitline <--> asRouter_BO.ethg++;
+        asRouter_A1.ethg++ <--> gigabitline <--> asRouter_KH.ethg++;
+        asRouter_FR.ethg++ <--> gigabitline <--> asRouter_MZ.ethg++;
+        asRouter_RS.ethg++ <--> gigabitline <--> asRouter_BG.ethg++;
+        asRouter_MA.ethg++ <--> gigabitline <--> asRouter_ZA.ethg++;
+        asRouter_CO.ethg++ <--> gigabitline <--> asRouter_MX.ethg++;
+
+        originServer1.ethg++ <--> gigabitline <--> asRouter_US.ethg++;
+        surrogateServer1.ethg++ <--> gigabitline <--> asRouter_SE.ethg++;
+        surrogateServer2.ethg++ <--> gigabitline <--> asRouter_CA.ethg++;
+
+
+        // clients_IE.ethg++ <--> gigabitline <--> asRouter_IE.ethg++;
+        clients_DE.ethg++ <--> gigabitline <--> asRouter_DE.ethg++;
+        clients_MX.ethg++ <--> gigabitline <--> asRouter_MX.ethg++;
+        clients_CA.ethg++ <--> gigabitline <--> asRouter_CA.ethg++;
+        clients_SE.ethg++ <--> gigabitline <--> asRouter_SE.ethg++;
+        clients_BY.ethg++ <--> gigabitline <--> asRouter_BY.ethg++;
+        clients_DK.ethg++ <--> gigabitline <--> asRouter_DK.ethg++;
+        clients_CZ.ethg++ <--> gigabitline <--> asRouter_CZ.ethg++;
+        clients_LI.ethg++ <--> gigabitline <--> asRouter_LI.ethg++;
+        clients_BE.ethg++ <--> gigabitline <--> asRouter_BE.ethg++;
+        clients_KH.ethg++ <--> gigabitline <--> asRouter_KH.ethg++;
+        clients_A1.ethg++ <--> gigabitline <--> asRouter_A1.ethg++;
+        //clients_IL.ethg++ <--> gigabitline <--> asRouter_IL.ethg++;
+        clients_AX.ethg++ <--> gigabitline <--> asRouter_AX.ethg++;
+        clients_NO.ethg++ <--> gigabitline <--> asRouter_NO.ethg++;
+        //clients_CH.ethg++ <--> gigabitline <--> asRouter_CH.ethg++;
+        clients_KR.ethg++ <--> gigabitline <--> asRouter_KR.ethg++;
+        clients_PL.ethg++ <--> gigabitline <--> asRouter_PL.ethg++;
+        clients_JP.ethg++ <--> gigabitline <--> asRouter_JP.ethg++;
+        clients_NL.ethg++ <--> gigabitline <--> asRouter_NL.ethg++;
+        clients_HK.ethg++ <--> gigabitline <--> asRouter_HK.ethg++;
+        clients_SI.ethg++ <--> gigabitline <--> asRouter_SI.ethg++;
+        clients_AP.ethg++ <--> gigabitline <--> asRouter_AP.ethg++;
+        clients_ES.ethg++ <--> gigabitline <--> asRouter_ES.ethg++;
+        //clients_PH.ethg++ <--> gigabitline <--> asRouter_PH.ethg++;
+        clients_MD.ethg++ <--> gigabitline <--> asRouter_MD.ethg++;
+        clients_LU.ethg++ <--> gigabitline <--> asRouter_LU.ethg++;
+        clients_SG.ethg++ <--> gigabitline <--> asRouter_SG.ethg++;
+        //clients_SK.ethg++ <--> gigabitline <--> asRouter_SK.ethg++;
+        clients_GB.ethg++ <--> gigabitline <--> asRouter_GB.ethg++;
+        clients_UA.ethg++ <--> gigabitline <--> asRouter_UA.ethg++;
+        clients_BS.ethg++ <--> gigabitline <--> asRouter_BS.ethg++;
+        //clients_DZ.ethg++ <--> gigabitline <--> asRouter_DZ.ethg++;
+        clients_MC.ethg++ <--> gigabitline <--> asRouter_MC.ethg++;
+        clients_RU.ethg++ <--> gigabitline <--> asRouter_RU.ethg++;
+        clients_LA.ethg++ <--> gigabitline <--> asRouter_LA.ethg++;
+        clients_BO.ethg++ <--> gigabitline <--> asRouter_BO.ethg++;
+        clients_FR.ethg++ <--> gigabitline <--> asRouter_FR.ethg++;
+        clients_TW.ethg++ <--> gigabitline <--> asRouter_TW.ethg++;
+        clients_EU.ethg++ <--> gigabitline <--> asRouter_EU.ethg++;
+        //clients_EG.ethg++ <--> gigabitline <--> asRouter_EG.ethg++;
+        //clients_SM.ethg++ <--> gigabitline <--> asRouter_SM.ethg++;
+        clients_MY.ethg++ <--> gigabitline <--> asRouter_MY.ethg++;
+        clients_RO.ethg++ <--> gigabitline <--> asRouter_RO.ethg++;
+        //clients_BA.ethg++ <--> gigabitline <--> asRouter_BA.ethg++;
+        //clients_GR.ethg++ <--> gigabitline <--> asRouter_GR.ethg++;
+        //clients_MT.ethg++ <--> gigabitline <--> asRouter_MT.ethg++;
+        clients_FI.ethg++ <--> gigabitline <--> asRouter_FI.ethg++;
+        clients_GH.ethg++ <--> gigabitline <--> asRouter_GH.ethg++;
+        //clients_IN.ethg++ <--> gigabitline <--> asRouter_IN.ethg++;
+        //clients_GT.ethg++ <--> gigabitline <--> asRouter_GT.ethg++;
+        clients_MA.ethg++ <--> gigabitline <--> asRouter_MA.ethg++;
+        clients_CN.ethg++ <--> gigabitline <--> asRouter_CN.ethg++;
+        clients_IS.ethg++ <--> gigabitline <--> asRouter_IS.ethg++;
+        clients_SL.ethg++ <--> gigabitline <--> asRouter_SL.ethg++;
+        clients_AU.ethg++ <--> gigabitline <--> asRouter_AU.ethg++;
+        clients_US.ethg++ <--> gigabitline <--> asRouter_US.ethg++;
+        //clients_IT.ethg++ <--> gigabitline <--> asRouter_IT.ethg++;
+        clients_BG.ethg++ <--> gigabitline <--> asRouter_BG.ethg++;
+        clients_HU.ethg++ <--> gigabitline <--> asRouter_HU.ethg++;
+        clients_NG.ethg++ <--> gigabitline <--> asRouter_NG.ethg++;
+        //clients_GI.ethg++ <--> gigabitline <--> asRouter_GI.ethg++;
+        clients_KZ.ethg++ <--> gigabitline <--> asRouter_KZ.ethg++;
+        //clients_SA.ethg++ <--> gigabitline <--> asRouter_SA.ethg++;
+        clients_PY.ethg++ <--> gigabitline <--> asRouter_PY.ethg++;
+        //clients_CL.ethg++ <--> gigabitline <--> asRouter_CL.ethg++;
+        clients_ID.ethg++ <--> gigabitline <--> asRouter_ID.ethg++;
+        clients_CO.ethg++ <--> gigabitline <--> asRouter_CO.ethg++;
+        //clients_BD.ethg++ <--> gigabitline <--> asRouter_BD.ethg++;
+        //clients_AT.ethg++ <--> gigabitline <--> asRouter_AT.ethg++;
+        // clients_LT.ethg++ <--> gigabitline <--> asRouter_LT.ethg++;
+        //clients_LB.ethg++ <--> gigabitline <--> asRouter_LB.ethg++;
+        clients_IR.ethg++ <--> gigabitline <--> asRouter_IR.ethg++;
+        clients_ZA.ethg++ <--> gigabitline <--> asRouter_ZA.ethg++;
+        clients_TR.ethg++ <--> gigabitline <--> asRouter_TR.ethg++;
+        clients_IQ.ethg++ <--> gigabitline <--> asRouter_IQ.ethg++;
+        clients_PT.ethg++ <--> gigabitline <--> asRouter_PT.ethg++;
+        clients_LV.ethg++ <--> gigabitline <--> asRouter_LV.ethg++;
+        clients_VE.ethg++ <--> gigabitline <--> asRouter_VE.ethg++;
+        clients_BH.ethg++ <--> gigabitline <--> asRouter_BH.ethg++;
+        clients_GA.ethg++ <--> gigabitline <--> asRouter_GA.ethg++;
+        clients_AF.ethg++ <--> gigabitline <--> asRouter_AF.ethg++;
+        clients_JE.ethg++ <--> gigabitline <--> asRouter_JE.ethg++;
+        clients_NZ.ethg++ <--> gigabitline <--> asRouter_NZ.ethg++;
+        clients_AR.ethg++ <--> gigabitline <--> asRouter_AR.ethg++;
+        //clients_PR.ethg++ <--> gigabitline <--> asRouter_PR.ethg++;
+        //clients_ME.ethg++ <--> gigabitline <--> asRouter_ME.ethg++;
+        //clients_RS.ethg++ <--> gigabitline <--> asRouter_RS.ethg++;
+        //clients_AM.ethg++ <--> gigabitline <--> asRouter_AM.ethg++;
+        //clients_CY.ethg++ <--> gigabitline <--> asRouter_CY.ethg++;
+        //clients_GE.ethg++ <--> gigabitline <--> asRouter_GE.ethg++;
+        //clients_AW.ethg++ <--> gigabitline <--> asRouter_AW.ethg++;
+        //clients_PA.ethg++ <--> gigabitline <--> asRouter_PA.ethg++;
+        //clients_AN.ethg++ <--> gigabitline <--> asRouter_AN.ethg++;
+        //clients_TN.ethg++ <--> gigabitline <--> asRouter_TN.ethg++;
+        //clients_AE.ethg++ <--> gigabitline <--> asRouter_AE.ethg++;
+       // clients_HR.ethg++ <--> gigabitline <--> asRouter_HR.ethg++;
+       // clients_KE.ethg++ <--> gigabitline <--> asRouter_KE.ethg++;
+        //clients_TH.ethg++ <--> gigabitline <--> asRouter_TH.ethg++;
+        //clients_KG.ethg++ <--> gigabitline <--> asRouter_KG.ethg++;
+
+
+
+
+
+}

@@ -1,0 +1,196 @@
+# ----------------------------------------------------------------------------
+#
+# CDNLab Project
+#
+# --------------------------------------------------------------------------
+[General]
+network = CDN_InfrastructureByCountry
+cmdenv-express-mode = true
+
+tkenv-plugin-path = ../../../../etc/plugins
+tkenv-default-run = 1
+#sim-time-limit = 100d
+
+# Controller
+**.controller.logLevel = 0
+**.controller.config = xmldoc("configs/controller_cfg.xml","//controller-profile[@id='uniform']")
+**.controller.events = ""
+**.controller.eventsSection = ""
+**.controller.cdnMode = true
+# udp app (off)
+**.numUdpApps = 0
+
+# tcp apps
+**.client*.numTcpApps = 1
+**.client*.tcpApp[0].typename = "HttpCDNBrowser"
+**.client*.tcpApp[0].httpProtocol = 11
+**.client*.tcpApp[0].logLevel = 2
+**.client*.tcpApp[0].logFile = "" # Logging disabled
+**.client*.tcpApp[0].config = xmldoc("configs/browser_cfg.xml","//user-profile[@id='normal']")
+**.client*.tcpApp[0].activationTime = 0.0
+
+# Origin Servers
+**.*originServer*.tcpApp[0].typename = "OriginServer"
+**.*originServer*.tcpApp[0].IP_address_on_web = "69.73.128.0"
+**.*originServer*.tcpApp[0].latitude = 0
+**.*originServer*.tcpApp[0].longitude = 0
+#**.*originServer*.tcpApp[0].cache_size = 0
+# Surrogate Servers
+**.*surrogateServer*.tcpApp[0].typename = "SurrogateServer"
+# Servers
+**.*Server*.numTcpApps = 1
+**.*Server*.tcpApp[0].hostName = "www.googlecreeper.net"
+**.*Server*.tcpApp[0].port = 80
+**.*Server*.tcpApp[0].httpProtocol = 11
+**.*Server*.tcpApp[0].logLevel = 2
+**.*Server*.tcpApp[0].logFile = "" # Logging disabled
+**.*Server*.tcpApp[0].siteDefinition = "" # Use the random page and resource generation
+**.*Server*.tcpApp[0].config = xmldoc("configs/server_cfg.xml","//server-profile[@id='normal']")
+**.*Server*.tcpApp[0].activationTime = 0.0
+#
+**.*surrogateServer1*.tcpApp[0].IP_address_on_web = "69.73.128.0"
+**.*surrogateServer1*.tcpApp[0].latitude = 59
+**.*surrogateServer1*.tcpApp[0].longitude = 18
+**.*surrogateServer1*.tcpApp[0].cache_size = 0
+#
+**.*surrogateServer2*.tcpApp[0].IP_address_on_web = ""
+**.*surrogateServer2*.tcpApp[0].latitude = 44
+**.*surrogateServer2*.tcpApp[0].longitude = -80
+**.*surrogateServer2*.tcpApp[0].cache_size = 0
+# tcp settings
+#**.tcp.mss = 1024
+#**.tcp.advertisedWindow = 14336  # 14*mss
+#**.tcp.tcpAlgorithmClass = "TCPReno"
+#**.tcp.recordStats = true
+
+# ip settings
+**.routingFile = ""
+**.ip.procDelay = 10000us
+**.*client*.IPForward = false
+**.*Server*.IPForward = false
+
+# ARP configuration
+**.arp.retryTimeout = 1s
+**.arp.retryCount = 3
+**.arp.cacheTimeout = 100s
+**.networkLayer.proxyARP = true  # Host's is hardwired "false"
+
+# NIC configuration
+**.ppp[*].queueType = "DropTailQueue" # in routers
+**.ppp[*].queue.frameCapacity = 10  # in routers
+
+#[Config random]
+# Random browse events and page generation.
+#**.*client*.tcpApp[0].scriptFile = "" # Script file disabled
+#**.*Server*.tcpApp[0].siteDefinition = "" # Use the random page and resource generation
+
+[Config scripted]
+# The single server uses a scripted site definition. The browser executes scripted
+# events which request valid pages from the server. This should result in only valid
+# responses.
+#**.*originServer*.tcpApp[0].siteDefinition = "sites/www_googlecreeper_net/site_definition.pagedef"
+
+#Origin server
+**.*originServer*.tcpApp[0].siteDefinition = "sites/www_googlecreeper_net/site_definition.pagedef"
+
+#CLIENTS
+**.clients_HU.tcpApp[0].scriptFile = "sites/browse/browse_clients_HU.script"
+**.clients_HR.tcpApp[0].scriptFile = "sites/browse/browse_clients_HR.script"
+**.clients_IN.tcpApp[0].scriptFile = "sites/browse/browse_clients_IN.script"
+**.clients_IQ.tcpApp[0].scriptFile = "sites/browse/browse_clients_IQ.script"
+**.clients_IL.tcpApp[0].scriptFile = "sites/browse/browse_clients_IL.script"
+**.clients_ID.tcpApp[0].scriptFile = "sites/browse/browse_clients_ID.script"
+**.clients_IE.tcpApp[0].scriptFile = "sites/browse/browse_clients_IE.script"
+**.clients_PY.tcpApp[0].scriptFile = "sites/browse/browse_clients_PY.script"
+**.clients_AE.tcpApp[0].scriptFile = "sites/browse/browse_clients_AE.script"
+**.clients_PR.tcpApp[0].scriptFile = "sites/browse/browse_clients_PR.script"
+**.clients_AF.tcpApp[0].scriptFile = "sites/browse/browse_clients_AF.script"
+**.clients_PT.tcpApp[0].scriptFile = "sites/browse/browse_clients_PT.script"
+**.clients_GT.tcpApp[0].scriptFile = "sites/browse/browse_clients_GT.script"
+**.clients_GR.tcpApp[0].scriptFile = "sites/browse/browse_clients_GR.script"
+**.clients_PL.tcpApp[0].scriptFile = "sites/browse/browse_clients_PL.script"
+**.clients_PH.tcpApp[0].scriptFile = "sites/browse/browse_clients_PH.script"
+**.clients_HK.tcpApp[0].scriptFile = "sites/browse/browse_clients_HK.script"
+**.clients_PA.tcpApp[0].scriptFile = "sites/browse/browse_clients_PA.script"
+**.clients_A1.tcpApp[0].scriptFile = "sites/browse/browse_clients_A1.script"
+**.clients_BG.tcpApp[0].scriptFile = "sites/browse/browse_clients_BG.script"
+**.clients_BH.tcpApp[0].scriptFile = "sites/browse/browse_clients_BH.script"
+**.clients_BD.tcpApp[0].scriptFile = "sites/browse/browse_clients_BD.script"
+**.clients_BE.tcpApp[0].scriptFile = "sites/browse/browse_clients_BE.script"
+**.clients_BA.tcpApp[0].scriptFile = "sites/browse/browse_clients_BA.script"
+**.clients_SL.tcpApp[0].scriptFile = "sites/browse/browse_clients_SL.script"
+**.clients_SM.tcpApp[0].scriptFile = "sites/browse/browse_clients_SM.script"
+**.clients_SG.tcpApp[0].scriptFile = "sites/browse/browse_clients_SG.script"
+**.clients_AW.tcpApp[0].scriptFile = "sites/browse/browse_clients_AW.script"
+**.clients_SE.tcpApp[0].scriptFile = "sites/browse/browse_clients_SE.script"
+**.clients_AX.tcpApp[0].scriptFile = "sites/browse/browse_clients_AX.script"
+**.clients_SK.tcpApp[0].scriptFile = "sites/browse/browse_clients_SK.script"
+**.clients_AR.tcpApp[0].scriptFile = "sites/browse/browse_clients_AR.script"
+**.clients_KR.tcpApp[0].scriptFile = "sites/browse/browse_clients_KR.script"
+**.clients_SI.tcpApp[0].scriptFile = "sites/browse/browse_clients_SI.script"
+**.clients_AU.tcpApp[0].scriptFile = "sites/browse/browse_clients_AU.script"
+**.clients_AT.tcpApp[0].scriptFile = "sites/browse/browse_clients_AT.script"
+**.clients_KE.tcpApp[0].scriptFile = "sites/browse/browse_clients_KE.script"
+**.clients_AN.tcpApp[0].scriptFile = "sites/browse/browse_clients_AN.script"
+**.clients_KG.tcpApp[0].scriptFile = "sites/browse/browse_clients_KG.script"
+**.clients_AP.tcpApp[0].scriptFile = "sites/browse/browse_clients_AP.script"
+**.clients_KH.tcpApp[0].scriptFile = "sites/browse/browse_clients_KH.script"
+**.clients_SA.tcpApp[0].scriptFile = "sites/browse/browse_clients_SA.script"
+**.clients_AM.tcpApp[0].scriptFile = "sites/browse/browse_clients_AM.script"
+**.clients_RS.tcpApp[0].scriptFile = "sites/browse/browse_clients_RS.script"
+**.clients_RU.tcpApp[0].scriptFile = "sites/browse/browse_clients_RU.script"
+#**.clients_CH.tcpApp[0].scriptFile = "sites/browse/browse_clients_CH.script"
+**.clients_IT.tcpApp[0].scriptFile = "sites/browse/browse_clients_IT.script"
+**.clients_IS.tcpApp[0].scriptFile = "sites/browse/browse_clients_IS.script"
+**.clients_CA.tcpApp[0].scriptFile = "sites/browse/browse_clients_CA.script"
+**.clients_IR.tcpApp[0].scriptFile = "sites/browse/browse_clients_IR.script"
+**.clients_RO.tcpApp[0].scriptFile = "sites/browse/browse_clients_RO.script"
+**.clients_BY.tcpApp[0].scriptFile = "sites/browse/browse_clients_BY.script"
+**.clients_BS.tcpApp[0].scriptFile = "sites/browse/browse_clients_BS.script"
+**.clients_JP.tcpApp[0].scriptFile = "sites/browse/browse_clients_JP.script"
+**.clients_JE.tcpApp[0].scriptFile = "sites/browse/browse_clients_JE.script"
+**.clients_BO.tcpApp[0].scriptFile = "sites/browse/browse_clients_BO.script"
+**.clients_ZA.tcpApp[0].scriptFile = "sites/browse/browse_clients_ZA.script"
+**.clients_VE.tcpApp[0].scriptFile = "sites/browse/browse_clients_VE.script"
+**.clients_MT.tcpApp[0].scriptFile = "sites/browse/browse_clients_MT.script"
+**.clients_DZ.tcpApp[0].scriptFile = "sites/browse/browse_clients_DZ.script"
+**.clients_LU.tcpApp[0].scriptFile = "sites/browse/browse_clients_LU.script"
+**.clients_LV.tcpApp[0].scriptFile = "sites/browse/browse_clients_LV.script"
+**.clients_MD.tcpApp[0].scriptFile = "sites/browse/browse_clients_MD.script"
+**.clients_ME.tcpApp[0].scriptFile = "sites/browse/browse_clients_ME.script"
+**.clients_MC.tcpApp[0].scriptFile = "sites/browse/browse_clients_MC.script"
+**.clients_EG.tcpApp[0].scriptFile = "sites/browse/browse_clients_EG.script"
+**.clients_MA.tcpApp[0].scriptFile = "sites/browse/browse_clients_MA.script"
+**.clients_LI.tcpApp[0].scriptFile = "sites/browse/browse_clients_LI.script"
+**.clients_CN.tcpApp[0].scriptFile = "sites/browse/browse_clients_CN.script"
+**.clients_CO.tcpApp[0].scriptFile = "sites/browse/browse_clients_CO.script"
+**.clients_CL.tcpApp[0].scriptFile = "sites/browse/browse_clients_CL.script"
+**.clients_CZ.tcpApp[0].scriptFile = "sites/browse/browse_clients_CZ.script"
+**.clients_LT.tcpApp[0].scriptFile = "sites/browse/browse_clients_LT.script"
+**.clients_CY.tcpApp[0].scriptFile = "sites/browse/browse_clients_CY.script"
+**.clients_KZ.tcpApp[0].scriptFile = "sites/browse/browse_clients_KZ.script"
+**.clients_LA.tcpApp[0].scriptFile = "sites/browse/browse_clients_LA.script"
+**.clients_DK.tcpApp[0].scriptFile = "sites/browse/browse_clients_DK.script"
+**.clients_LB.tcpApp[0].scriptFile = "sites/browse/browse_clients_LB.script"
+**.clients_DE.tcpApp[0].scriptFile = "sites/browse/browse_clients_DE.script"
+**.clients_TH.tcpApp[0].scriptFile = "sites/browse/browse_clients_TH.script"
+**.clients_FR.tcpApp[0].scriptFile = "sites/browse/browse_clients_FR.script"
+**.clients_GA.tcpApp[0].scriptFile = "sites/browse/browse_clients_GA.script"
+**.clients_TW.tcpApp[0].scriptFile = "sites/browse/browse_clients_TW.script"
+**.clients_NZ.tcpApp[0].scriptFile = "sites/browse/browse_clients_NZ.script"
+**.clients_GB.tcpApp[0].scriptFile = "sites/browse/browse_clients_GB.script"
+**.clients_GE.tcpApp[0].scriptFile = "sites/browse/browse_clients_GE.script"
+**.clients_GI.tcpApp[0].scriptFile = "sites/browse/browse_clients_GI.script"
+**.clients_GH.tcpApp[0].scriptFile = "sites/browse/browse_clients_GH.script"
+**.clients_TN.tcpApp[0].scriptFile = "sites/browse/browse_clients_TN.script"
+**.clients_TR.tcpApp[0].scriptFile = "sites/browse/browse_clients_TR.script"
+**.clients_NG.tcpApp[0].scriptFile = "sites/browse/browse_clients_NG.script"
+**.clients_NL.tcpApp[0].scriptFile = "sites/browse/browse_clients_NL.script"
+**.clients_EU.tcpApp[0].scriptFile = "sites/browse/browse_clients_EU.script"
+**.clients_ES.tcpApp[0].scriptFile = "sites/browse/browse_clients_ES.script"
+**.clients_NO.tcpApp[0].scriptFile = "sites/browse/browse_clients_NO.script"
+**.clients_UA.tcpApp[0].scriptFile = "sites/browse/browse_clients_UA.script"
+**.clients_MX.tcpApp[0].scriptFile = "sites/browse/browse_clients_MX.script"
+**.clients_MY.tcpApp[0].scriptFile = "sites/browse/browse_clients_MY.script"
+**.clients_FI.tcpApp[0].scriptFile = "sites/browse/browse_clients_FI.script"
+**.clients_US.tcpApp[0].scriptFile = "sites/browse/browse_clients_US.script"

@@ -1,0 +1,97 @@
+# ----------------------------------------------------------------------------
+#
+# CDNLab Project
+#
+# --------------------------------------------------------------------------
+[General]
+network = CDN_Infrastructure_test
+
+cmdenv-express-mode = false
+
+tkenv-plugin-path = ../../../../etc/plugins
+tkenv-default-run = 1
+sim-time-limit = 100d
+
+# Controller
+**.controller.logLevel = 0
+**.controller.config = xmldoc("configs/controller_cfg.xml","//controller-profile[@id='uniform']")
+**.controller.events = ""
+**.controller.eventsSection = ""
+**.controller.cdnMode = true
+# udp app (off)
+**.numUdpApps = 0
+
+# tcp apps
+**.client*.numTcpApps = 1
+**.client*.tcpApp[0].typename = "HttpCDNBrowser"
+**.client*.tcpApp[0].httpProtocol = 11
+**.client*.tcpApp[0].logLevel = 2
+**.client*.tcpApp[0].logFile = "" # Logging disabled
+**.client*.tcpApp[0].config = xmldoc("configs/browser_cfg.xml","//user-profile[@id='normal']")
+**.client*.tcpApp[0].activationTime = 0.0
+
+# Origin Servers
+**.*originServer*.tcpApp[0].typename = "OriginServer"
+**.*originServer*.tcpApp[0].IP_address_on_web = "69.73.128.0"
+**.*originServer*.tcpApp[0].latitude = 0
+**.*originServer*.tcpApp[0].longitude = 0
+**.*originServer*.tcpApp[0].cache_size = 0
+# Surrogate Servers
+**.*surrogateServer*.tcpApp[0].typename = "SurrogateServer"
+# Servers
+**.*Server*.numTcpApps = 1
+**.*Server*.tcpApp[0].hostName = "www.single.org"
+**.*Server*.tcpApp[0].port = 80
+**.*Server*.tcpApp[0].httpProtocol = 11
+**.*Server*.tcpApp[0].logLevel = 2
+**.*Server*.tcpApp[0].logFile = "" # Logging disabled
+**.*Server*.tcpApp[0].siteDefinition = "" # Use the random page and resource generation
+**.*Server*.tcpApp[0].config = xmldoc("configs/server_cfg.xml","//server-profile[@id='normal']")
+**.*Server*.tcpApp[0].activationTime = 0.0
+#
+**.*surrogateServer1*.tcpApp[0].IP_address_on_web = "69.73.128.0"
+**.*surrogateServer1*.tcpApp[0].latitude = 51
+**.*surrogateServer1*.tcpApp[0].longitude = 9
+**.*surrogateServer1*.tcpApp[0].cache_size = 0
+#
+**.*surrogateServer2*.tcpApp[0].IP_address_on_web = ""
+**.*surrogateServer2*.tcpApp[0].latitude = 34
+**.*surrogateServer2*.tcpApp[0].longitude = 135
+**.*surrogateServer2*.tcpApp[0].cache_size = 0
+# tcp settings
+**.tcp.mss = 1024
+**.tcp.advertisedWindow = 14336  # 14*mss
+**.tcp.tcpAlgorithmClass = "TCPReno"
+**.tcp.recordStats = true
+
+# ip settings
+**.routingFile = ""
+**.ip.procDelay = 10000us
+**.*client*.IPForward = false
+**.*Server*.IPForward = false
+
+# ARP configuration
+**.arp.retryTimeout = 10s
+**.arp.retryCount = 3
+**.arp.cacheTimeout = 100s
+**.networkLayer.proxyARP = true  # Host's is hardwired "false"
+
+# NIC configuration
+**.ppp[*].queueType = "DropTailQueue" # in routers
+**.ppp[*].queue.frameCapacity = 10  # in routers
+
+#[Config random]
+# Random browse events and page generation.
+#**.*client*.tcpApp[0].scriptFile = "" # Script file disabled
+#**.*Server*.tcpApp[0].siteDefinition = "" # Use the random page and resource generation
+
+[Config scripted]
+# The single server uses a scripted site definition. The browser executes scripted
+# events which request valid pages from the server. This should result in only valid
+# responses.
+#**.*originServer*.tcpApp[0].siteDefinition = "sites/www_googlecreeper_net/site_definition.pagedef"
+
+#CLIENTS
+**.*client*.tcpApp[0].scriptFile = "sites/browse.script"
+**.*client*.tcpApp[0].reconnectInterval = 0 # TODO: CHECK USE
+**.*originServer*.tcpApp[0].siteDefinition = "sites/www_single_org/www_single_org.sitedef"
